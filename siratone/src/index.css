@@ -71,13 +71,3 @@ button:focus-visible {
   }
 }
 
-/* media query for phones */
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  body {
-    padding: 0 12px;
-  }
-}
