@@ -66,7 +66,7 @@ function ColorsList() {
       key={post.id}
       className="post-item"
       style={{
-        gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas
+        gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
       }}
     >
       {/* color box */}
