@@ -61,18 +61,28 @@ function ColorsList() {
       <h2>siratone</h2>
   
       <div className="posts-grid">
-        {posts.map((post) => (
-          <div key={post.id} className="post-item">
-  
-            {/* Quadrat de color */}
-            <div className="color-box" style={{ "--color": post.rgb }} />
-  
-            {/* Text del hex */}
-            <h3 className ="color-text"style={{ "--color": post.rgb }}>{post.hex}</h3>
-  
-          </div>
-        ))}
+  {posts.map((post) => (
+    <div
+      key={post.id}
+      className="post-item"
+      style={{
+        gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas
+      }}
+    >
+      {/* color box */}
+      <div className="color-box" style={{ backgroundColor: post.rgb }}>
+        {/* save icon */}
+        <button className="save-button">
+          <img src="/icons/save.svg" alt="Guardar" />
+        </button>
+
+        {/* Texto HEX  */}
+        <span className="hex-text">{post.hex}</span>
       </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 }

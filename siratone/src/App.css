@@ -1,0 +1,13 @@
+.phone-frame {
+    width: 393px;    /* iPhone 16 */
+    height: 852px;   /* iPhone 16 */
+    margin: 0 auto;
+    background: white;
+    border-radius: 38px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }

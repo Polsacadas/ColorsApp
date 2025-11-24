@@ -3,7 +3,12 @@ import ColorsList from './components/ColorsList.jsx'
 
 function App() {
   return ( 
-    <ColorsList />
+    <div className="phone-frame">
+      {/* <Header /> */}
+      <ColorsList />
+      {/* <Footer /> */}
+    </div>
+    
   )
 }
 
