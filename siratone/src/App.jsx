@@ -1,3 +1,11 @@
-import './App.css';
-import ColorsList from './ColorsList';
+import ColorsList from './components/ColorsList.jsx'
+
+
+function App() {
+  return ( 
+    <ColorsList />
+  )
+}
+
+export default App;
 

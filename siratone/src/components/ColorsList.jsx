@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import './ColorsList.css';
+
 //import './PostList.css'; // Importem el CSS mobile-first
 
 // URL de l'API que farem servir
-const API_URL = 'https://x-colors.yurace.pro/api/random';
+const API_URL = 'https://x-colors.yurace.pro/api/random?number=25';
 
 
 function ColorsList() {
@@ -53,21 +55,23 @@ function ColorsList() {
     return <div className="error-message">Error: {error}</div>;
   }
 
-  // 2. Renderitzat principal (si tot ha anat bé)
+
   return (
     <div className="post-list-container">
-      <h2>Publicacions de l'API</h2>
-
-      {/* 3. El .map() per "pintar" les dades */}
+      <h2>siratone</h2>
+  
       <div className="posts-grid">
-        
-        
-          
-          
-            <h3>{posts.rgb}</h3>
-            
-        
-        
+        {posts.map((post) => (
+          <div key={post.id} className="post-item">
+  
+            {/* Quadrat de color */}
+            <div className="color-box" style={{ "--color": post.rgb }} />
+  
+            {/* Text del hex */}
+            <h3 className ="color-text"style={{ "--color": post.rgb }}>{post.hex}</h3>
+  
+          </div>
+        ))}
       </div>
     </div>
   );
