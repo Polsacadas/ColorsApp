@@ -4,7 +4,7 @@ import './ColorsList.css';
 //import './PostList.css'; // Importem el CSS mobile-first
 
 // URL de l'API que farem servir
-const API_URL = 'https://x-colors.yurace.pro/api/random?number=25';
+const API_URL = 'https://x-colors.yurace.pro/api/random?number=250';
 
 
 function ColorsList() {
@@ -58,17 +58,26 @@ function ColorsList() {
 
   return (
     <div className="post-list-container">
-      <h2>siratone</h2>
-  
+
+      <div className = "filters-containers">
+        <button className = "btn-filter">Inicio</button>
+        <button className = "btn-filter">Green</button>
+        <button className = "btn-filter">Red</button>
+        <button className = "btn-filter">Yellow</button>
+        <button className = "btn-filter">Blue</button>
+        <button className = "btn-filter">Purple</button>
+
+      </div>
+     
       <div className="posts-grid">
-  {posts.map((post) => (
-    <div
-      key={post.id}
-      className="post-item"
-      style={{
-        gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
-      }}
-    >
+      {posts.map((post) => (
+          <li
+            key={post.id}
+            className="post-item"
+            style={{
+              gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
+            }}
+          >
       {/* color box */}
       <div className="color-box" style={{ backgroundColor: post.rgb }}>
         {/* save icon */}
@@ -79,7 +88,7 @@ function ColorsList() {
         {/* Texto HEX  */}
         <span className="hex-text">{post.hex}</span>
       </div>
-    </div>
+    </li>
   ))}
 </div>
 

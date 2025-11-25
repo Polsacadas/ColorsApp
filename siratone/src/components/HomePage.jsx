@@ -7,11 +7,10 @@ import Header from './Header.jsx'
 function HomePage() {
   return ( 
     <>
-    <div className="phone-frame">
+
       <Header /> 
       <ColorsList />
-    </div>
-    <Footer /> 
+      <Footer /> 
     </>
     
   )
