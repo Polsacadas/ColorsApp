@@ -58,8 +58,9 @@ function ColorsList() {
 
   return (
     <div className="post-list-container">
-                                                            {/* DIV DE FLITROS SUPERIORES */}
+
       <div className = "filters-containers">
+        
         <button className = "btn-filter">Inicio</button>
         <button className = "btn-filter">Green</button>
         <button className = "btn-filter">Red</button>
@@ -67,10 +68,13 @@ function ColorsList() {
         <button className = "btn-filter">Blue</button>
         <button className = "btn-filter">Purple</button>
 
+        
+        
+
       </div>
-                                                            {/* DIV DE GRID DE COLORES */}     
+     
       <div className="posts-grid">
-        {posts.map((post) => (
+      {posts.map((post) => (
           <li
             key={post.id}
             className="post-item"
@@ -78,21 +82,19 @@ function ColorsList() {
               gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
             }}
           >
-        
-          {/* color box */}
-            <div className="color-box" style={{ backgroundColor: post.rgb }}>
-      
-            {/* save icon */}
-            <button className="save-button">
-              <img src="/icons/save.svg" alt="Guardar" />
-            </button>
+      {/* color box */}
+      <div className="color-box" style={{ backgroundColor: post.rgb }}>
+        {/* save icon */}
+        <button className="save-button">
+          <img src="/icons/save.svg" alt="Guardar" />
+        </button>
 
-            {/* Texto HEX  */}
-            <span className="hex-text">{post.hex}</span>
-            </div>
-          </li>
-        ))}
+        {/* Texto HEX  */}
+        <span className="hex-text">{post.hex}</span>
       </div>
+    </li>
+  ))}
+</div>
 
     </div>
   );
