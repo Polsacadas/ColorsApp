@@ -7,7 +7,6 @@ import Header from './Header.jsx'
 function HomePage() {
   return ( 
     <>
-
       <Header /> 
       <ColorsList />
       <Footer /> 
