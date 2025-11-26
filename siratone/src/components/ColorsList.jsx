@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ColorsList.css';
-
+import {Link } from 'react-router-dom'
 //import './PostList.css'; // Importem el CSS mobile-first
 
 // URL de l'API que farem servir
@@ -70,27 +70,34 @@ function ColorsList() {
       </div>
      
       <div className="posts-grid">
+      
       {posts.map((post) => (
           <li
-            key={post.id}
+            key={post.hex}
             className="post-item"
             style={{
               gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
             }}
-          >
-      {/* color box */}
-      <div className="color-box" style={{ backgroundColor: post.rgb }}>
-        {/* save icon */}
-        <button className="save-button">
-          <img src="/icons/save.svg" alt="Guardar" />
-        </button>
+            
+          ><Link
+              to={`/post/${post.hex}`}
+            style={{ display: "flex", width: "100%" }}
+>
+            {/* color box */}
+            <div className="color-box" style={{ backgroundColor: post.rgb }}>
+              {/* save icon */}
+              <button className="save-button">
+                <img src="/icons/save.svg" alt="Guardar" />
+              </button>
 
-        {/* Texto HEX  */}
-        <span className="hex-text">{post.hex}</span>
-      </div>
-    </li>
-  ))}
-</div>
+              {/* Texto HEX  */}
+              <span className="hex-text">{post.hex}</span>
+            </div>
+
+            </Link>
+          </li>
+          ))}
+       </div>
 
     </div>
   );

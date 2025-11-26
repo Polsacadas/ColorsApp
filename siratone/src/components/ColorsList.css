@@ -14,6 +14,9 @@
   grid-auto-rows: 60px;
   gap: 10px;
 }
+.link-wrapper{
+  display: block;
+}
 /* El contenedor padre */
 .filters-containers {
   display: flex;          
