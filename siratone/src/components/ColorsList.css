@@ -1,7 +1,7 @@
 /*IPHONE 16: 402 X 874*/
 .post-list-container {
   padding: 10px;
- margin-top:90px;
+  margin-top:90px;
   min-height: 100vh; 
   width: 100%;   
   min-width: 100vw; 
@@ -47,9 +47,17 @@
   white-space: nowrap; 
 }
 
+.btn-filter:nth-child(1):hover {background-color: #b7b7b7;color: white;}
 
+.btn-filter:nth-child(2):hover {background-color: #6ad0aa;color: white;}
 
+.btn-filter:nth-child(3):hover {background-color: #f76b6b;color: white;}
 
+.btn-filter:nth-child(4):hover {background-color: #f3f779;color: white;}
+
+.btn-filter:nth-child(5):hover {background-color: #79b8f7;color: white;}
+
+.btn-filter:nth-child(6):hover {background-color: #e263e8;color: white;}
 
  
 @media (min-width: 480px) {
@@ -109,7 +117,6 @@
   transform: rotate(-90deg);
   transform-origin: left top;
   font-size: 18px;
-  /*font-weight: bolder;*/
   color: white;
   padding: 2px 4px;
 }

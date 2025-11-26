@@ -60,12 +60,16 @@ function ColorsList() {
     <div className="post-list-container">
 
       <div className = "filters-containers">
+        
         <button className = "btn-filter">Inicio</button>
         <button className = "btn-filter">Green</button>
         <button className = "btn-filter">Red</button>
         <button className = "btn-filter">Yellow</button>
         <button className = "btn-filter">Blue</button>
         <button className = "btn-filter">Purple</button>
+
+        
+        
 
       </div>
      
