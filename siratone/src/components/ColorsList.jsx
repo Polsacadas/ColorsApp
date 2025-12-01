@@ -80,7 +80,7 @@ function ColorsList() {
             }}
             
           ><Link
-              to={`/post/1`}
+              to={`/post/${post.hex}`}
             style={{ display: "flex", width: "100%" }}
 >
             {/* color box */}
