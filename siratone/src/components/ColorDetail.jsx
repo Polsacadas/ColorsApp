@@ -14,7 +14,8 @@ function ColorDetail() {
     }, [id]);
 
      return (
-      <h3>{post.id}</h3>
+      
+      <h3>hola</h3>
     );
   }
   
