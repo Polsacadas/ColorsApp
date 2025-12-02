@@ -36,7 +36,7 @@ function ColorDetail() {
         </Link>
       <div className="detail-card">
         
-        {/* EL CUADRO DE COLOR AHORA ES EL CONTENEDOR PADRE */}
+       
         <div 
           className="color-swatch-container" 
           style={{ backgroundColor: colorData.hex.value }}
@@ -44,7 +44,7 @@ function ColorDetail() {
           <button className="save-button">
                 <img src="/icons/save.svg" alt="Guardar" />
               </button>
-            {/* LA INFO VA DENTRO, EN UNA CAJA SEMITRANSPARENTE */}
+            
             <div className="overlay-info">
       
                 <div className="detail-info">
