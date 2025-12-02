@@ -1,4 +1,4 @@
-import ColorsList from './components/ColorsList.jsx'
+  import ColorsList from './components/ColorsList.jsx'
 import ColorDetail from './components/ColorDetail.jsx'
 import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
@@ -13,6 +13,7 @@ function App() {
     <Routes>
       <Route path = "/" element ={<ColorsList />}/>
       <Route path = "/post/:id" element ={<ColorDetail />}/>
+      {/* Route a favs */}
      
     </Routes>
 
