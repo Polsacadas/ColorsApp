@@ -1,23 +1,76 @@
 import {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
+import './ColorDetail.css';
 
 function ColorDetail() {
-    const {hex} = useParams();
-    console.log("hex");
-    const [post, setPost] = useState(null);
+  // 1. Recibimos el ID de la URL (ej: "61FD88")
+  const { id } = useParams();
+  
+  // 2. Estado para guardar los datos que vendrán de internet
+  const [colorData, setColorData] = useState(null);
 
-    useEffect(()=>{
-        fetch(`https://x-colors.yurace.pro/api/random?number=250/post/${hex}`)
-        .then(res => res.json())
-        .then(data => setPost(data));
+  useEffect(() => {
+    
+    fetch(`https://www.thecolorapi.com/id?hex=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setColorData(data);
+      })
+      .catch((error) => console.error("Error cargando color:", error));
+  }, [id]); 
 
-    }, [hex]);
-
-     return (
-      <>
-      <h3>{post.hex}</h3>
-      </>
+ 
+  if (!colorData) {
+    return (
+      <div style={{ padding: "50px", textAlign: "center" }}>
+        <h2>Carregant informació...</h2>
+      </div>
     );
   }
-  
-  export default ColorDetail;
+
+
+  return (
+    <div className="detail-container">
+       <Link to="/" className="back-btn">
+          Tornar
+        </Link>
+      <div className="detail-card">
+        
+        {/* EL CUADRO DE COLOR AHORA ES EL CONTENEDOR PADRE */}
+        <div 
+          className="color-swatch-container" 
+          style={{ backgroundColor: colorData.hex.value }}
+        >
+          <button className="save-button">
+                <img src="/icons/save.svg" alt="Guardar" />
+              </button>
+            {/* LA INFO VA DENTRO, EN UNA CAJA SEMITRANSPARENTE */}
+            <div className="overlay-info">
+      
+                <div className="detail-info">
+                  <p><strong>HEX:</strong> {colorData.hex.value}</p>
+                  <p><strong>RGB:</strong> {colorData.rgb.value}</p>
+                </div>
+            </div>
+        </div>
+
+       <div>
+        <p>Complementary color:</p>
+       </div>
+        <div className ="palette-generator">
+      <button className="palette-button">
+                Generatte Palette
+              </button>
+      </div>
+       
+    </div>
+    </div>
+
+   
+  );
+}
+
+
+
+
+export default ColorDetail;

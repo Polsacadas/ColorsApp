@@ -57,6 +57,9 @@ function ColorsList() {
 
 
   return (
+    
+ 
+    
     <div className="post-list-container">
 
       <div className = "filters-containers">
@@ -80,7 +83,7 @@ function ColorsList() {
             }}
             
           ><Link
-              to={`/post/${post.hex}`}
+              to={`/post/${post.hex.replace('#', '')}`}
             style={{ display: "flex", width: "100%" }}
 >
             {/* color box */}
