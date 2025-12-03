@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ColorsList.css';
-import {Link } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom';
 //import './PostList.css'; // Importem el CSS mobile-first
 
 // URL de l'API que farem servir
@@ -8,7 +8,8 @@ const API_URL = 'https://x-colors.yurace.pro/api/random?number=250';
 
 
 function ColorsList() {
-  
+    const navigate = useNavigate();
+
   // --- ESTATS ---
   // 1. Els 3 estats per a la càrrega de dades
   const [posts, setPosts] = useState(null); // 'null' per saber que no s'ha carregat res
@@ -93,7 +94,14 @@ function ColorsList() {
             {/* color box */}
             <div className="color-box" style={{ backgroundColor: post.rgb }}>
               {/* save icon */}
-              <button className="save-button">
+              <button
+                className="save-button"
+                onClick={(e) => {
+                  e.preventDefault();     // evita que el Link padre navegue
+                  e.stopPropagation();    // evita que el evento se propague al Link padre
+                  navigate("/FavoritesPage"); // navegación correcta sin href
+                }}
+              >
                 <img src="/icons/save.svg" alt="Guardar" />
               </button>
 
