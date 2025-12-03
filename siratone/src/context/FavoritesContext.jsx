@@ -1,16 +1,16 @@
-import { createContext, usState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 // 1. Creamos el context
 const FavoritesContext = createContext();
 
 //2. creamos componente que inyecta los datos
-export function FavoritesProvider({ children}) {
+export function FavoritesProvider({children}) {
     const [favorites, setFavorites] = useState([]);
 
     //toggle per afegir/treure
     const toggleFavorite = (post) => {
         //comprobamos si existe
-        const exists = favorites.find(fav.id === post.id);
+        const exists = favorites.find(fav => fav.id === post.id);
 
         if (exists){
             //si ya existe lo ponemos que se pueda sacar (filtramos todos menos este)
