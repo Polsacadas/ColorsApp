@@ -1,4 +1,4 @@
-import { createContext, usState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 // 1. Creamos el context
 const FavoritesContext = createContext();

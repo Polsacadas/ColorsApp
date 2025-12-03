@@ -1,27 +1,25 @@
-import { useState } from 'react';
+
+import { useTheme } from './ThemeContext'; 
 import './Header.css';
 
 function Header() {
-  const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    // Opcional: aplica la clase al body para cambiar tema
-    if (!darkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="header">
-      <h1 className="header-title">Home</h1>
-      <label className="switch">
-        <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
-        <span className="slider round"></span>
-      </label>
-    </div>
+    <header style={{ 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      marginBottom: '20px',
+      borderBottom: '1px solid #ccc'
+    }}>
+      <h1>La Meva App ({theme})</h1>
+      
+      {/* Botó que modifica l'estat global */}
+      <button onClick={toggleTheme}>
+        Canviar a {theme === 'light' ? 'Fosc 🌙' : 'Clar ☀️'}
+      </button>
+    </header>
   );
 }
 
