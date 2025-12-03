@@ -58,36 +58,27 @@ function ColorsList() {
 
 
   return (
-    
- 
-    
     <div className="post-list-container">
-
+                                                            {/* DIV DE FLITROS SUPERIORES */}
       <div className = "filters-containers">
-        
         <button className = "btn-filter">Inicio</button>
         <button className = "btn-filter">Green</button>
         <button className = "btn-filter">Red</button>
         <button className = "btn-filter">Yellow</button>
         <button className = "btn-filter">Blue</button>
         <button className = "btn-filter">Purple</button>
-
-        
-        
-
       </div>
-     
+                                                            {/* DIV DE GRID DE COLORES */}     
       <div className="posts-grid">
-      
-      {posts.map((post) => (
+        {posts.map((post) => (
           <li
             key={post.hex}
             className="post-item"
             style={{
               gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
             }}
-            
-          ><Link
+          >
+          <Link
               to={`/post/${post.hex.replace('#', '')}`}
             style={{ display: "flex", width: "100%" }}
 >
@@ -109,10 +100,9 @@ function ColorsList() {
               <span className="hex-text">{post.hex}</span>
             </div>
 
-            </Link>
-          </li>
-          ))}
-       </div>
+            </Link>          </li>
+        ))}
+      </div>
 
     </div>
   );
