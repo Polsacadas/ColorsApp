@@ -27,12 +27,30 @@
   cursor: pointer;
   outline:none;
 }
-  
-.save-button img {
+
+.is-favorite {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border:none;
+  padding: 8px;
+  cursor: pointer;
+  outline:none;
+}
+
+
+/*.save-button img {
   width: 30px;
   height: 30px;
-  filter: brightness(0) invert(1); /*para cambiar el color nrego predet del icono svg*/
-}
+  filter: brightness(0) invert(1); para cambiar el color nrego predet del icono svg
+}*/
+
+/*.is-favorite img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); para cambiar el color nrego predet del icono svg
+}*/
 
 
 .color-swatch-container{
