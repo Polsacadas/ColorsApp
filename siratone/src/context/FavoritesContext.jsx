@@ -7,6 +7,9 @@ const FavoritesContext = createContext();
 export function FavoritesProvider({children}) {
     const [favorites, setFavorites] = useState([]);
 
+    // Estado para PALETAS
+    const [favPalettes, setFavPalettes] = useState([]);
+
     //toggle per afegir/treure
     const toggleFavorite = (post) => {
         //comprobamos si existe
@@ -26,9 +29,27 @@ export function FavoritesProvider({children}) {
         return favorites.some(fav => fav.id === id);
     };
 
+    // --- LÓGICA PALETAS ---
+    const toggleFavoritePalette = (palette) => {
+        const exists = favPalettes.find(fav => fav.id === palette.id);
+        
+        if (exists) {
+            // Si ya existe, la quitamos
+            setFavPalettes(favPalettes.filter(fav => fav.id !== palette.id));
+        } else {
+            // Si no existe, la añadimos
+            setFavPalettes([...favPalettes, palette]);
+        }
+    };
+
+    const isFavoritePalette = (id) => {
+        return favPalettes.some(fav => fav.id === id);
+    };
+
     //3. Retornamos el Provider con los valores que queremos compatir
     return (
-        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, favPalettes,
+            toggleFavoritePalette, isFavoritePalette }}>
             {children}
         </FavoritesContext.Provider>
     );
