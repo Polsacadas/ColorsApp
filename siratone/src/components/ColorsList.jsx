@@ -85,10 +85,8 @@ function ColorsList() {
             {/* color box */}
             <div className="color-box" style={{ backgroundColor: post.rgb }}>
               {/* save icon */}
-              <button
-                className="save-button"
-              >
-                <img src="/icons/save.svg" alt="Guardar" />
+              <button className="save-button">
+              <img src="/icons/save.svg" alt="Guardar" />
               </button>
 
               {/* Texto HEX  */}
