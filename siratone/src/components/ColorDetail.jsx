@@ -1,42 +1,56 @@
-import {useEffect, useState} from "react";
-import {useParams, Link} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import './ColorDetail.css';
 
 function ColorDetail() {
-  // 1. Recibimos el ID de la URL (ej: "61FD88")
   const { id } = useParams();
-  
-  // 2. Estado para guardar los datos que vendrán de internet
+
   const [colorData, setColorData] = useState(null);
 
-  //Datos para las paletas:
+  // Paleta + control para reiniciar animaciones
   const [palette, setPalette] = useState(null);
   const [loadingPalette, setLoadingPalette] = useState(false);
   const [paletteError, setPaletteError] = useState(null);
-
+  const [paletteVersion, setPaletteVersion] = useState(0); // para forzar nuevo key y reiniciar anims
 
   useEffect(() => {
-    
     fetch(`https://www.thecolorapi.com/id?hex=${id}`)
       .then((res) => res.json())
       .then((data) => {
         setColorData(data);
       })
       .catch((error) => console.error("Error cargando color:", error));
-  }, [id]); 
+  }, [id]);
 
   const generatePalette = () => {
+    if (!colorData) return;
     setLoadingPalette(true);
     setPaletteError(null);
-
+  
     fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=analogic&count=5`)
       .then((res) => res.json())
       .then((data) => {
-        setPalette(data.colors); // array de colores
+        const mainHex = colorData.hex.value.toUpperCase();
+        const remoteColors = Array.isArray(data.colors) ? data.colors : [];
+  
+        // Filtramos el color principal si ya está en la paleta
+        const filtered = remoteColors.filter(
+          (c) => c.hex && c.hex.value.toUpperCase() !== mainHex
+        );
+  
+        // Tomamos solo los primeros 5 colores
+        const paletteFive = filtered.slice(0, 5);
+  
+        setPalette(paletteFive);
+        setPaletteVersion((v) => v + 1);
       })
-      .catch(() => setPaletteError("Error generating palette"))
+      .catch((err) => {
+        console.error(err);
+        setPaletteError("Error generating palette");
+      })
       .finally(() => setLoadingPalette(false));
   };
+  
 
   const getComplementaryColor = (rgb) => {
     const r = 255 - rgb.r;
@@ -56,76 +70,74 @@ function ColorDetail() {
     );
   }
 
-  // Cálculo del color complemetario
   const complementaryHex = getComplementaryColor(colorData.rgb);
-
 
   return (
     <div className="detail-container">
-       <Link to="/" className="back-btn">
-          Tornar
-        </Link>
-{/* INCLUYE COLOR, COMPLEMETARIO Y GENERADOR PALETA */}
+      <Link to="/" className="back-btn">
+        Tornar
+      </Link>
+
       <div className="detail-card">
-{/* COLOR */}
-        <div 
-          className="color-swatch-container" 
+        {/* COLOR */}
+        <div
+          className="color-swatch-container"
           style={{ backgroundColor: colorData.hex.value }}
         >
           <button className="save-button">
-                <img src="/icons/save.svg" alt="Guardar" />
-              </button>
-            
-            <div className="overlay-info">
-                <div className="detail-info">
-                  <p><strong>HEX:</strong> {colorData.hex.value}</p>
-                  <p><strong>RGB:</strong> {colorData.rgb.value}</p>
-                </div>
+            <img src="/icons/save.svg" alt="Guardar" />
+          </button>
+
+          <div className="overlay-info">
+            <div className="detail-info">
+              <p><strong>HEX:</strong> {colorData.hex.value}</p>
+              <p><strong>RGB:</strong> {colorData.rgb.value}</p>
             </div>
+          </div>
         </div>
 
-{/* COLOR COMPLEMENTARIO */}
+        {/* COLOR COMPLEMENTARIO */}
         <div className="complementario-container">
-
           <div className="complementario-text">
             <span>Complementary</span>
             <span>color</span>
           </div>
 
           <div className="complementario-rect" style={{ backgroundColor: complementaryHex }}>
-            <span className="complementario-hex">
-              {complementaryHex}
-            </span>
+            <span className="complementario-hex">{complementaryHex}</span>
           </div>
-
         </div>
 
-{/* GENERADOR DE PALETA */}
-        <div className ="palette-generator">
-      <button className="palette-button" onClick={generatePalette}>
-                Generatte Palette
-              </button>
-      </div>
+        {/* GENERADOR DE PALETA */}
+        <div className="palette-generator">
+          <button className="palette-button" onClick={generatePalette}>
+            Generate Palette
+          </button>
+        </div>
+
         {loadingPalette && <p>Generating palette...</p>}
         {paletteError && <p>{paletteError}</p>}
 
+        {/* PALETA: se renderiza en un contenedor fijo bottom; key={paletteVersion} reinicia anim */}
         {palette && (
-          <div className="palette-container">
-            {palette.map((col) => (
-              <div 
-                key={col.hex.value}
+          <div className="palette-container" key={`palette-${paletteVersion}`}>
+            {palette.map((col, index) => (
+              <div
+                key={col.hex.value + index}
                 className="palette-color"
-                style={{ backgroundColor: col.hex.value }}
+                style={{
+                  backgroundColor: col.hex.value,
+                  // stagger animation: index * 120ms
+                  animationDelay: `${index * 120}ms`,
+                }}
               >
-                <span>{col.hex.value}</span>
+                <span className="palette-hex">{col.hex.value}</span>
               </div>
             ))}
           </div>
         )}
+      </div>
     </div>
-    </div>
-
-   
   );
 }
 

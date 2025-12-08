@@ -1,17 +1,12 @@
- .detail-container {
 
+ .detail-container {
   position: fixed; 
- 
   top: 10vh;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  
-  
-  
 }
 
 .detail-card {
@@ -75,10 +70,7 @@ text-align: left ;
   padding: 2px 4px;
 }
 
-.palette-generator{
-    display:inline-block;
-    margin-top: 20px;
-}
+
 .back-btn {
   display: inline-block;
   
@@ -103,7 +95,7 @@ text-align: left ;
   grid-template-columns: auto 150px; 
   align-items: center;
   gap: 30px;
-  margin: 30px auto 25px auto;
+  margin: 30px auto 15px auto;
   width: 300px;
   height: 8vh;
 
@@ -138,7 +130,71 @@ text-align: left ;
 
   font-size: 12px;
   color: white;
-  font-weight: bold;
   white-space: nowrap;
   pointer-events: none;
+}
+
+
+/* PALETTE */
+
+.palette-generator{
+  display:inline-block;
+  margin: 15px 0 15px 0;
+}
+
+.palette-button{
+width: 100%;
+background-color: #d4d4d4;
+border-radius: 50px;
+height: 12vw;
+}
+
+.palette-container {
+  position: relative;  
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  gap: 5px;
+}
+
+/* rectángulo del color de la palette */
+.palette-color {
+  width: 100px;            
+  height: 180px;          
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+
+  /* Animación de los colores de la palete */
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  animation-name: pop;
+  animation-duration: 360ms;
+  animation-timing-function: cubic-bezier(.2,.9,.2,1);
+  animation-fill-mode: forwards;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.palette-hex {
+  color: white;
+  margin: 10px 0;
+  font-size: 14px;
+  transform: rotate(-90deg);
+}
+
+@keyframes pop {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
