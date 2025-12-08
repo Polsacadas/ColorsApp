@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import './ColorDetail.css';
+import { useFavorites } from '../context/FavoritesContext'; // LLAMA EL HOOK AQUIIIIIIIIIIIIII
 
 function ColorDetail() {
   const { id } = useParams();
-
   const [colorData, setColorData] = useState(null);
 
   // Paleta + control para reiniciar animaciones
@@ -62,6 +62,11 @@ function ColorDetail() {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
   };
 
+//----------------------------------------------------------------------------
+  const { toggleFavorite, isFavorite } = useFavorites(); //las variables de faps
+  
+//---------------------------------------------------------------------------
+
   if (!colorData) {
     return (
       <div style={{ padding: "50px", textAlign: "center" }}>
@@ -70,10 +75,25 @@ function ColorDetail() {
     );
   }
 
+//----------------------------------------------------------------------
+// Lògica per a Favorits
+// Creem l'objecte 'post' amb la informació necessària per al context de favorits
+const post = colorData ? {
+    id: id, // L'ID ja és el HEX sense '#'
+    hex: colorData.hex.value, // El valor HEX complet
+    rgb: colorData.rgb.value // El valor RGB per si de cas
+    // Aquí podries afegir altres dades si les necessites per a FavoritesPage
+} : null;
+
+// Comprovem si l'element actual és favorit
+const isCurrentFavorite = post ? isFavorite(post.id) : false;
+//----------------------------------------------------------------------  
+
   const complementaryHex = getComplementaryColor(colorData.rgb);
 
   return (
     <div className="detail-container">
+
       <Link to="/" className="back-btn">
         Tornar
       </Link>
@@ -84,9 +104,19 @@ function ColorDetail() {
           className="color-swatch-container"
           style={{ backgroundColor: colorData.hex.value }}
         >
-          <button className="save-button">
-            <img src="/icons/save.svg" alt="Guardar" />
-          </button>
+{/*----------------------------------------------------------*/}
+          {post && ( // Només renderitzem si tenim l'objecte post (colorData)
+            <button 
+              className={`save-button ${isCurrentFavorite ? 'is-favorite' : ''}`}
+              onClick={() => toggleFavorite(post)} 
+            >
+              <img 
+                src={isCurrentFavorite ? "/icons/save-filled.svg" : "/icons/save.svg"} 
+                alt={isCurrentFavorite ? "Treure de Favorits" : "Guardar a Favorits"} 
+              />
+            </button>
+          )}
+{/*----------------------------------------------------------*/}
 
           <div className="overlay-info">
             <div className="detail-info">

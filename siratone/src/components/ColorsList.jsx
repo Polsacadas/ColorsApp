@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import './ColorsList.css';
-import {Link, useNavigate } from 'react-router-dom';
 //import './PostList.css'; // Importem el CSS mobile-first
+import {Link } from 'react-router-dom'; 
+import { useFavorites } from '../context/FavoritesContext'; // 1. IMPORTEM EL HOOK AQUUIIIIIII
 
 // URL de l'API que farem servir
 const API_URL = 'https://x-colors.yurace.pro/api/random?number=250';
 
 
 function ColorsList() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate(); no cal ---------------------------------------------
+
+    const { toggleFavorite, isFavorite } = useFavorites(); // 2. UTILITZEM EL HOOK
 
   // --- ESTATS ---
   // 1. Els 3 estats per a la càrrega de dades
@@ -30,8 +33,13 @@ function ColorsList() {
           throw new Error(`Error HTTP: ${response.status}`);
         }
         const data = await response.json();
+
+        const postsWithHeight = data.map(post => ({
+          ...post, //Mantiene propiedades existebtes
+          gridHeight: Math.floor(Math.random() * 3) + 2 //Guardamos height
+        }));
         //console.log(data);
-        setPosts(data); // 1. Guardem les dades
+        setPosts(postsWithHeight); // 1. Guardem les dades amb l'alçada inclosa
       } catch (err) {
         setError(err.message); // 2. Guardem l'error
       } finally {
@@ -44,12 +52,13 @@ function ColorsList() {
     
   }, []); // <-- Array buit = "executa't només un cop al muntar"
 
+
   
   // --- LÒGICA DE RENDERITZAT ---
   
   // 1. Renderitzat condicional (gestió d'estats de càrrega)
   if (loading) {
-    return <p>Carregant publicacions...</p>;
+    return <p>Carregant colors...</p>;
   }
 
   if (error) {
@@ -70,12 +79,26 @@ function ColorsList() {
       </div>
                                                             {/* DIV DE GRID DE COLORES */}     
       <div className="posts-grid">
-        {posts.map((post) => (
+        
+        {posts.map((post) => {
+
+          // --- 1. DECLARACIÓ DE VARIABLES DINS DEL MAP ---
+        // Creem l'objecte necessari per a FavoritesContext
+        const favoriteItem = {
+            id: post.hex.replace('#', ''), // Usem el hex sense '#' com a ID
+            hex: post.hex,
+            rgb: post.rgb
+        };
+        // Comprovem l'estat
+        const isFav = isFavorite(favoriteItem.id);
+
+        return ( // AFEGIM RETURN
           <li
             key={post.hex}
             className="post-item"
             style={{
-              gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
+              gridRowEnd: `span ${post.gridHeight}` //VaLor guardado antes (con altura)
+              //gridRowEnd: `span ${Math.floor(Math.random() * 3) + 2}` // 2 a 4 filas (HAY QUE HABLARLO)
             }}
           >
           <Link
@@ -84,6 +107,7 @@ function ColorsList() {
 >
             {/* color box */}
             <div className="color-box" style={{ backgroundColor: post.rgb }}>
+              
               {/* save icon */}
               <button className="save-button">
               <img src="/icons/save.svg" alt="Guardar" />
@@ -93,8 +117,10 @@ function ColorsList() {
               <span className="hex-text">{post.hex}</span>
             </div>
 
-            </Link>          </li>
-        ))}
+            </Link>          
+          </li>
+        );
+        })}
       </div>
 
     </div>

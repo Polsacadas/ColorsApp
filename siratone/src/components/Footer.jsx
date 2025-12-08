@@ -1,16 +1,17 @@
 import './Footer.css';
+import { Link } from 'react-router-dom'; //------------
+  
 function Footer() {
     return (
       <div className="footer">
-        <button className="footer-button">
+        <Link to="/" className="footer-button"> {/* Link para Home */}
           <img src="/icons/home.svg" alt="Home" />
-        </button>
-        <button className="footer-button">
+        </Link>
+        <Link to="/FavoritesPage" className="footer-button"> {/* Link para Favorits */}
           <img src="/icons/save.svg" alt="Guardados" />
-        </button>
+        </Link>
       </div>
     );
-  }
-  
-  export default Footer;
-  
+}
+
+export default Footer;
