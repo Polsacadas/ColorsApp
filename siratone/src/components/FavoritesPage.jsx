@@ -35,7 +35,7 @@ function FavoritesPage() {
         </div>
       </div>
 
-      {/* --- CONTENIDO: COLORES --- */}
+      {/* --- CONTENIDO COLORES --- */}
       {activeTab === 'colors' && (
         <>
           {favorites.length === 0 ? (
@@ -74,7 +74,7 @@ function FavoritesPage() {
         </>
       )}
 
-      {/* --- CONTENIDO: PALETAS --- */}
+      {/* --- CONTENIDO PALETAS --- */}
       {activeTab === 'palettes' && (
         <div className="empty-message">
           <h3>Paletes guardades</h3>

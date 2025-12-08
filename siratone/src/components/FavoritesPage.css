@@ -1,4 +1,4 @@
-/* --- ESTILOS DE LAS PESTAÑAS--- */
+/* --- PESTAÑAS--- */
 .fav-header {
   padding: 10px 20px;
   text-align: center;
@@ -15,7 +15,7 @@
 .tab-btn {
   padding: 10px 24px;
   border: none;
-  border-radius: 25px; /* Bordes muy redondeados (tipo pastilla) */
+  border-radius: 25px; 
   background-color: #f0f0f0;
   color: #666;
   font-weight: 600;
@@ -24,9 +24,9 @@
   transition: all 0.3s ease;
 }
 
-/* Estilo cuando el botón está activo */
+/* botón está activo */
 .tab-btn.active {
-  background-color: #333; /* Color oscuro (o tu color principal) */
+  background-color: #333; 
   color: white;
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -38,7 +38,6 @@
   color: #888;
 }
 
-/* --- ESTILOS DE LA GRID (Mantenemos los de antes) --- */
 .favorites-grid {
   padding: 10px;
   display: grid;
@@ -48,11 +47,10 @@
 }
 
 .favorites-grid h2 {
-  display: none; /* Ocultamos el título dentro del grid pq ya lo tenemos arriba */
+  display: none; 
 }
 
-/* ... AQUÍ PEGA EL RESTO DEL CSS QUE HICIMOS EN EL PASO ANTERIOR ... */
-/* (El bloque .favorites-grid .post-item, .save-button, etc.) */
+
 .favorites-grid .post-item {
   aspect-ratio: 1 / 1;
   border-radius: 12px;
@@ -61,12 +59,12 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* --- LAYOUT EXTERNO (Cuadrícula de 3) --- */
+/* --- Cuadrícula de 3 --- */
 .favorites-grid {
   padding: 10px; /* Igual que en ColorList */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-  gap: 10px; /* Gap igual que en ColorList */
+  gap: 10px; 
   list-style: none;
 }
 
@@ -79,10 +77,10 @@
   color: #333;
 }
 
-/* --- EL CUBO (Item) --- */
+/* --- CUBO  --- */
 .favorites-grid .post-item {
-  aspect-ratio: 1 / 1; /* Esto fuerza que sean cuadrados perfectos */
-  border-radius: 12px; /* Mismo radio que ColorList */
+  aspect-ratio: 1 / 1; 
+  border-radius: 12px; 
   overflow: hidden;
   position: relative;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -91,15 +89,13 @@
 
 
 
-/* La caja de color ocupa todo el espacio */
 .favorites-grid .color-box {
   width: 100%;
   height: 100%;
-  position: relative; /* Clave para posicionar lo de dentro */
-  display: block; /* Importante: Block para que funcionen los absolute de dentro */
+  position: relative; 
+  display: block; 
 }
 
-/* Botón de guardar (Igual que ColorList: Arriba derecha) */
 .favorites-grid .save-button {
   position: absolute;
   top: 5px;
@@ -108,21 +104,20 @@
   border: none;
   padding: 8px;
   cursor: pointer;
-  z-index: 10; /* Aseguramos que quede por encima */
+  z-index: 10; 
 }
 
 .favorites-grid .save-button img {
   width: 30px;
   height: 30px;
-  /* Icono blanco por defecto, igual que en tu lista */
+
   filter: brightness(0) invert(1); 
 }
 
-/* Texto HEX (Igual que ColorList: Girado -90deg) */
 .favorites-grid .hex-text {
   position: absolute;
   left: 15px;
-  top: 90%; /* Ajustado ligeramente para el cuadrado */
+  top: 90%; 
   transform: rotate(-90deg);
   transform-origin: left top;
   font-size: 18px;
