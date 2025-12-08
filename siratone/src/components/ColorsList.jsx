@@ -87,11 +87,6 @@ function ColorsList() {
               {/* save icon */}
               <button
                 className="save-button"
-                onClick={(e) => {
-                  e.preventDefault();     // evita que el Link padre navegue
-                  e.stopPropagation();    // evita que el evento se propague al Link padre
-                  navigate("/FavoritesPage"); // navegación correcta sin href
-                }}
               >
                 <img src="/icons/save.svg" alt="Guardar" />
               </button>
