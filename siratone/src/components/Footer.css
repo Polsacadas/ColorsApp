@@ -12,19 +12,18 @@
     align-items: center;
     gap: 50%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    
-  }
+}
   
-  .footer-button {
+.footer-button {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-  }
+}
   
-  .footer-button img {
+.footer-button img {
     width: 30px;
     height: 30px;
-    filter: brightness(0) invert(0.25); /* Iconos blancos */
-  }
+    filter: brightness(0) invert(0.25); 
+}
   

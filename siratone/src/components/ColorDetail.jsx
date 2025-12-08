@@ -38,6 +38,16 @@ function ColorDetail() {
       .finally(() => setLoadingPalette(false));
   };
 
+  const getComplementaryColor = (rgb) => {
+    const r = 255 - rgb.r;
+    const g = 255 - rgb.g;
+    const b = 255 - rgb.b;
+
+    const toHex = (value) => value.toString(16).padStart(2, '0').toUpperCase();
+
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  };
+
   if (!colorData) {
     return (
       <div style={{ padding: "50px", textAlign: "center" }}>
@@ -46,15 +56,18 @@ function ColorDetail() {
     );
   }
 
+  // Cálculo del color complemetario
+  const complementaryHex = getComplementaryColor(colorData.rgb);
+
 
   return (
     <div className="detail-container">
        <Link to="/" className="back-btn">
           Tornar
         </Link>
+{/* INCLUYE COLOR, COMPLEMETARIO Y GENERADOR PALETA */}
       <div className="detail-card">
-        
-       
+{/* COLOR */}
         <div 
           className="color-swatch-container" 
           style={{ backgroundColor: colorData.hex.value }}
@@ -64,7 +77,6 @@ function ColorDetail() {
               </button>
             
             <div className="overlay-info">
-      
                 <div className="detail-info">
                   <p><strong>HEX:</strong> {colorData.hex.value}</p>
                   <p><strong>RGB:</strong> {colorData.rgb.value}</p>
@@ -72,9 +84,23 @@ function ColorDetail() {
             </div>
         </div>
 
-       <div>
-        <p>Complementary color:</p>
-       </div>
+{/* COLOR COMPLEMENTARIO */}
+        <div className="complementario-container">
+
+          <div className="complementario-text">
+            <span>Complementary</span>
+            <span>color</span>
+          </div>
+
+          <div className="complementario-rect" style={{ backgroundColor: complementaryHex }}>
+            <span className="complementario-hex">
+              {complementaryHex}
+            </span>
+          </div>
+
+        </div>
+
+{/* GENERADOR DE PALETA */}
         <div className ="palette-generator">
       <button className="palette-button" onClick={generatePalette}>
                 Generatte Palette
@@ -102,8 +128,5 @@ function ColorDetail() {
    
   );
 }
-
-
-
 
 export default ColorDetail;

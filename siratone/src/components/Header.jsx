@@ -6,7 +6,6 @@ function Header() {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    // Opcional: aplica la clase al body para cambiar tema
     if (!darkMode) {
       document.body.classList.add('dark-mode');
     } else {
