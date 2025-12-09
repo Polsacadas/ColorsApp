@@ -134,12 +134,12 @@ const isCurrentFavorite = post ? isFavorite(post.id) : false;
           </div>
 
           <Link 
-  to={`/post/${complementaryHex.replace('#', '')}`} 
-  className="complementario-rect"
-  style={{ backgroundColor: complementaryHex }}
->
-  <span className="complementario-hex">{complementaryHex}</span>
-</Link>
+            to={`/post/${complementaryHex.replace('#', '')}`} 
+            className="complementario-rect"
+            style={{ backgroundColor: complementaryHex }}
+          >
+            <span className="complementario-hex">{complementaryHex}</span>
+          </Link>
 
         </div>
 
