@@ -168,20 +168,22 @@ height: 12vw;
 }
 
 .palette-container {
-  position: relative;  
+  position: relative;
+  margin: none;
   display: flex;
   flex-direction: row; 
   align-items: center;
   gap: 5px;
+  
 }
 
 /* rectángulo del color de la palette */
 .palette-color {
   width: 100px;            
-  height: 180px;          
-  border-radius: 12px;
+  height: 270px;          
+  border-radius: 12px 12px 0px 0px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   position: relative;
 
