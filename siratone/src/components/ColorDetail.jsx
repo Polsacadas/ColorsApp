@@ -133,9 +133,14 @@ const isCurrentFavorite = post ? isFavorite(post.id) : false;
             <span>color</span>
           </div>
 
-          <div className="complementario-rect" style={{ backgroundColor: complementaryHex }}>
-            <span className="complementario-hex">{complementaryHex}</span>
-          </div>
+          <Link 
+  to={`/post/${complementaryHex.replace('#', '')}`} 
+  className="complementario-rect"
+  style={{ backgroundColor: complementaryHex }}
+>
+  <span className="complementario-hex">{complementaryHex}</span>
+</Link>
+
         </div>
 
         {/* GENERADOR DE PALETA */}
