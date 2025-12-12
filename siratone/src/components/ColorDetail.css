@@ -168,7 +168,13 @@ height: 12vw;
 }
 
 .palette-container {
-  position: relative;
+  position: fixed;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  height: 32vh;
+
+
   margin: none;
   display: flex;
   flex-direction: row; 
@@ -180,7 +186,7 @@ height: 12vw;
 /* rectángulo del color de la palette */
 .palette-color {
   width: 100px;            
-  height: 270px;          
+  height: 100%;          
   border-radius: 12px 12px 0px 0px;
   display: flex;
   align-items: center;
@@ -215,6 +221,85 @@ height: 12vw;
   }
   100% {
     transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+
+.palette-generator{
+  width: 300px; 
+  margin: 15px auto 15px auto; 
+}
+
+.palette-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  height: 12vw;
+  transition: justify-content 0.3s ease-out; 
+}
+
+.palette-controls.palette-generated {
+  justify-content: space-between; 
+}
+
+/* ColorDetail.css */
+.palette-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  
+  opacity: 0; 
+  animation-name: slide-in-right;
+  animation-duration: 0.2s; 
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards; 
+  animation-delay: 0.2s; 
+}
+
+
+
+.palette-button{
+  height: 12vw; 
+  background-color: #d4d4d4;
+  border-radius: 50px;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+/* ESTADO INICIAL BOTON GENERATE PALETTE*/
+.palette-controls:not(.palette-generated) .palette-button {
+  width: 100%;
+}
+
+/* ESTADO FINAL ICONO BOTON GENERATE PALETTE*/
+.palette-controls.palette-generated .palette-button {
+  height: 12vw; 
+  width: 50px; 
+  border-radius: 50%; /* Se vuelve circular */
+  padding: 8px;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.reload-icon {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(1); 
+}
+
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
     opacity: 1;
   }
 }
