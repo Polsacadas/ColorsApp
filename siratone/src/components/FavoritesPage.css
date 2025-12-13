@@ -127,3 +127,85 @@
   white-space: nowrap;
 }
 
+/* --- ESTILS NOUS PER A LES PALETES (ESTIL IMATGE) --- */
+
+.palettes-grid { /* grid VERTICAL */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Espai entre paletes */
+}
+
+.palette-wrapper { /* wrapped = header  + tira */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.palette-header-row { /* CUBO BOTO D'ESBORRAR */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.palette-base-label { /* NOVA CLASSE */
+  font-size: 0.8rem;
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.palette-strip { /* Tira arrodonida */
+  display: flex;
+  width: 100%;
+  height: 100px; /* Alçada similar a la imatge */
+  border-radius: 15px; 
+  overflow: hidden; /* retalla els fills perquè no surtin de la corba */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+}
+
+
+.palette-strip-item { /* COLOR INDIVIDUAL */
+  flex: 1; /* Tots ocupen el mateix */
+  height: 100%;
+  position: relative; 
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.palette-strip-item:hover {
+  opacity: 0.9;
+}
+
+.palette-item-hex { /* TEXT HEX */
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: white;
+  font-size: 0.75rem; 
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3); 
+  pointer-events: none; /* No interfereix en el clic per redirigir als detalls del color */
+}
+
+.palette-delete-btn { /* BOTÓ ESBORRAR */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+
+}
+
+.palette-delete-btn:hover {
+  opacity: 1;
+}
+
+.palette-delete-btn img {
+  width: 100%;
+  height: 100%;
+}
+

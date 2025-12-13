@@ -1,5 +1,4 @@
-
- .detail-container {
+.detail-container {
   position: fixed; 
   top: 10vh;
   width: 100%;
@@ -10,13 +9,13 @@
 }
 
 .detail-card {
-    width: 85%; 
+  width: 85%; 
   padding: 30px;
-    height: 50%;
-  
+  height: 50%;
   text-align: center;
   font-family: sans-serif;
 }
+
 .save-button {
   position: absolute;
   top: 5px;
@@ -39,40 +38,21 @@
   outline:none;
 }
 
-
-/*.save-button img {
-  width: 30px;
-  height: 30px;
-  filter: brightness(0) invert(1); para cambiar el color nrego predet del icono svg
-}*/
-
-/*.is-favorite img {
-  width: 30px;
-  height: 30px;
-  filter: brightness(0) invert(1); para cambiar el color nrego predet del icono svg
-}*/
-
-
 .color-swatch-container{
   width: 300px;
   aspect-ratio: 1 / 1;
-
   border-radius: 15px;
   margin-bottom: 25px;
   margin: auto;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  
-  
   overflow: hidden; 
   position: relative;
 }
 
 .overlay-info {
-  
   color: white; 
-  
   padding: 20px 30px;
   border-radius: 12px;
   text-align: left;
@@ -81,8 +61,7 @@
 
 
 .detail-info {
- 
-text-align: left ;
+  text-align: left ;
   font-size: 16px;
   color: white;
   padding: 2px 4px;
@@ -91,7 +70,6 @@ text-align: left ;
 
 .back-btn {
   display: inline-block;
-  
   margin-left: 20px;
   padding: 10px 20px;
   background-color: #cccccc;
@@ -105,8 +83,6 @@ text-align: left ;
   background-color: #626262;
 }
 
-
-
 /* COLOR COMPLEMENTARIO */
 .complementario-container {
   display: grid;
@@ -116,11 +92,9 @@ text-align: left ;
   margin: 30px auto 15px auto;
   width: 300px;
   height: 8vh;
-
   justify-content: center;
   overflow: hidden; 
   position: relative;
-  
 }
 
 .complementario-text {
@@ -143,9 +117,7 @@ text-align: left ;
   position: absolute;
   top: 50%;
   left: 90%;
-
   transform: translate(-50%, -50%) rotate(-90deg);
-
   font-size: 12px;
   color: white;
   white-space: nowrap;
@@ -161,10 +133,10 @@ text-align: left ;
 }
 
 .palette-button{
-width: 100%;
-background-color: #d4d4d4;
-border-radius: 50px;
-height: 12vw;
+  width: 100%;
+  background-color: #d4d4d4;
+  border-radius: 50px;
+  height: 12vw;
 }
 
 .palette-container {
@@ -173,14 +145,11 @@ height: 12vw;
   left: 0;
   width: 100%;
   height: 32vh;
-
-
   margin: none;
   display: flex;
   flex-direction: row; 
   align-items: center;
   gap: 5px;
-  
 }
 
 /* rectángulo del color de la palette */
@@ -248,7 +217,6 @@ height: 12vw;
   font-size: 1.1em;
   font-weight: bold;
   color: #333;
-  
   opacity: 0; 
   animation-name: slide-in-right;
   animation-duration: 0.2s; 
@@ -266,7 +234,6 @@ height: 12vw;
   border: none;
   padding: 0 20px;
   cursor: pointer;
-  
   display: flex; 
   align-items: center;
   justify-content: center;
@@ -302,4 +269,31 @@ height: 12vw;
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+/* ---- NOVES CLASSES AFEGIDES PER AL PAS 1 (GUARDAR PALETA) ---- */
+
+/* Contenidor per alinear Títol + Botó petit */
+.palette-header {   /* NOVA CLASSE */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botó específic per a guardar la paleta (sense position absolute) */
+.save-palette-btn { /* NOVA CLASSE */
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-palette-btn img { /* NOVA CLASSE */
+  width: 100%;
+  height: 100%;
 }

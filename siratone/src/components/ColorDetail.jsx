@@ -66,7 +66,7 @@ function ColorDetail() {
   };
 
 //----------------------------------------------------------------------------
-  const { toggleFavorite, isFavorite } = useFavorites(); 
+  const { toggleFavorite, isFavorite, toggleFavoritePalette, isFavoritePalette } = useFavorites(); 
 //---------------------------------------------------------------------------
 
   if (!colorData) {
@@ -78,7 +78,9 @@ function ColorDetail() {
   }
 
 //----------------------------------------------------------------------
-// Lògica per a Favorits
+
+// Lògica per a Favorits Colors
+
 const post = colorData ? {
     id: id, 
     hex: colorData.hex.value, 
@@ -86,6 +88,21 @@ const post = colorData ? {
 } : null;
 
 const isCurrentFavorite = post ? isFavorite(post.id) : false;
+
+
+// Lògica per a Favorits Paletta
+
+const paletteId = `palette-${id}`; //Creem id únic per la paleta (basat en el color actual)
+const isFavPalette = isFavoritePalette(paletteId); //Comprovar si esta guardat
+
+
+const currentPaletteObj = { //Creem l'objecte que guardem al context
+  id: paletteId,
+  baseColor: id,
+  colors: palette
+};
+
+
 //----------------------------------------------------------------------  
 
   const complementaryHex = getComplementaryColor(colorData.rgb);
@@ -144,7 +161,23 @@ const isCurrentFavorite = post ? isFavorite(post.id) : false;
     <div className={`palette-controls ${palette ? 'palette-generated' : ''}`}>
       
       {palette && (
-        <span className="palette-title">Palette 1</span>
+        // AFEGIM CONTENIDOR FLEX PER AL TÍTOL I EL BOTÓ
+        <div className="palette-header"> 
+          <span className="palette-title">Palette 1</span>
+                 
+          {/* CANVI 2: Fem servir la classe "save-palette-btn" en lloc de "save-button" */}
+          <button 
+            className="save-palette-btn" 
+            onClick={() => toggleFavoritePalette(currentPaletteObj)}
+          >
+            <img 
+              src={isFavPalette ? "/icons/save-filled.svg" : "/icons/save.svg"} 
+              alt="Guardar Paleta"
+              // Afegim el filtre per si de cas la icona és blanca
+              style={{filter: 'brightness(0)'}} 
+            />
+          </button>
+        </div>
       )}
       
       <button 
