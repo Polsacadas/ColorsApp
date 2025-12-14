@@ -15,6 +15,7 @@
 }
 
 .header-title {
+    font-family: 'Inter', sans-serif; 
     flex: 1;
     text-align: left;
     margin-left: 5%;

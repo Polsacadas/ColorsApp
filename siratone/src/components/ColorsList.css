@@ -1,5 +1,6 @@
 /*IPHONE 16: 402 X 874*/
 .post-list-container {
+  font-family: 'Inter', sans-serif;
   padding: 10px;
   margin-top:15%;
   min-height: 100vh; 

@@ -61,6 +61,7 @@
 
 
 .detail-info {
+  font-family: 'Tuffy', sans-serif; 
   text-align: left ;
   font-size: 16px;
   color: white;
@@ -98,6 +99,7 @@
 }
 
 .complementario-text {
+  font-family: 'Tuffy', sans-serif; 
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -114,6 +116,7 @@
 }
 
 .complementario-hex {
+  font-family: 'Tuffy', sans-serif;
   position: absolute;
   top: 50%;
   left: 90%;
@@ -128,6 +131,7 @@
 /* PALETTE */
 
 .palette-generator{
+  font-family: 'Inter', sans-serif;
   display:inline-block;
   margin: 15px 0 15px 0;
 }
@@ -173,6 +177,7 @@
 }
 
 .palette-hex {
+  font-family: 'Inter', sans-serif;
   color: white;
   margin: 10px 0;
   font-size: 14px;
