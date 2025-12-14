@@ -1,46 +1,46 @@
-/* HeaderDetail.css */
-
 .header-detail {
     position: fixed;
     top: 0;
     width: 100vw;
-    height: 10vh; /* Ajustado para que ocupe la misma altura que tu contenedor */
+    height: 10vh; 
     
-    background-color: #f0f0f0; /* Fondo del header */
+    background-color: #f0f0f0; 
     color: #333;
 
     display: flex;
-    justify-content: space-between; /* Espacio entre los 3 elementos */
+    justify-content: space-between; 
     align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.header-detail {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 10vh; /* Ajustado para que ocupe la misma altura que tu contenedor */
-    
-    background-color: #f0f0f0; /* Fondo del header */
-    color: #333;
+.right-group {
 
+    width: 65px; 
+    flex-shrink: 0; 
     display: flex;
-    justify-content: space-between; /* Espacio entre los 3 elementos */
+    justify-content: flex-end; 
     align-items: center;
 }
+
+.left-group {
+    width: 65px; 
+    flex-shrink: 0;
+    
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
 
 .header-detail-title {
-    font-size: 1.8em;
+    font-size: 1em;
     font-weight: bold;
     margin: 0;
-    /* Esto es crucial: se asegura de que el título esté realmente centrado, 
-       incluso si el botón y el switch tienen diferentes anchos. */
     flex-grow: 1; 
     text-align: center;
-    /* Ajuste para compensar el espacio que ocupa el botón de la izquierda y el switch */
-    transform: translateX(0px); 
 }
 
-/* --- Botón Return (Izquierda) --- */
 .return-button {
     background-color: #ccc;
     border: none;
@@ -58,14 +58,10 @@
 .return-button img {
     width: 24px;
     height: 24px;
-    /* Si tu icono es negro y quieres que se vea bien sobre el gris claro, puedes invertirlo: */
-    /* filter: brightness(0) invert(1); */
 }
 
 
-/* --- Switch de Dark Mode (Derecha) --- */
-/* (Asegúrate de copiar los estilos para la clase .switch y .slider de tu Header.css original) */
-/* Ejemplo Mínimo: */
+
 .switch {
     position: relative;
     display: inline-block;
@@ -73,4 +69,3 @@
     height: 34px;
     flex-shrink: 0;
 }
-/* ... (Añade el resto de tu CSS para el switch aquí) ... */
