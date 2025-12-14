@@ -38,16 +38,10 @@
 }
 
 /* BOTONES FILTROS SUPERIORES */
-.btn-filter {
-  
-  flex: 0 0 auto; 
-
-  padding: 8px 42px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background: white;
-  cursor: pointer;
-  white-space: nowrap; 
+.btn-filter.active {
+    background-color: #000000; /* Un color de fondo distintivo */
+    color: white;
+    border-color: #007bff;
 }
 
 .btn-filter:nth-child(1):hover {background-color: #d2d2d2;color: white;}
