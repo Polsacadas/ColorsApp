@@ -112,7 +112,7 @@ function ColorsList() {
     return <div className="error-message">Error: {error}</div>;
   }
   
-  // Lista de filtros para mapear
+  // Lista de filtros
   const filterButtons = ['Inicio', 'Green', 'Red', 'Yellow', 'Blue', 'Purple', 'Neutral'];
 
   return (
