@@ -13,7 +13,10 @@ function ColorDetail() {
   const [loadingPalette, setLoadingPalette] = useState(false);
   const [paletteError, setPaletteError] = useState(null);
   const [paletteVersion, setPaletteVersion] = useState(0); // para forzar nuevo key y reiniciar anims
+  
+  const [paletteCount, setPaletteCount] = useState(0); //hago el contador para meter el numero de paleta generada
 
+  
   useEffect(() => {
     setPalette(null);
     setPaletteVersion(0);
@@ -26,27 +29,36 @@ function ColorDetail() {
       .catch((error) => console.error("Error cargando color:", error));
   }, [id]); // El efecto se ejecuta cada vez que 'id' cambia
 
+  const MODES = [
+    "analogic",
+    "monochrome",
+    "monochrome-dark",
+    "monochrome-light",
+    "triad",
+    "quad"
+  ];
   const generatePalette = () => {
     if (!colorData) return;
     setLoadingPalette(true);
     setPaletteError(null);
 
-    fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=analogic&count=5`)
+    const randomMode = MODES[Math.floor(Math.random() * MODES.length)];
+
+    fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=${randomMode}&count=5`)
       .then((res) => res.json())
       .then((data) => {
         const mainHex = colorData.hex.value.toUpperCase();
         const remoteColors = Array.isArray(data.colors) ? data.colors : [];
-
-        // Filtramos el color principal si ya está en la paleta
+        
         const filtered = remoteColors.filter(
-          (c) => c.hex && c.hex.value.toUpperCase() !== mainHex
+        (c) => c.hex && c.hex.value.toUpperCase() !== mainHex
       );
 
-        // Tomamos solo los primeros 5 colores
-        const paletteFive = filtered.slice(0, 5);
+        // solo 5 colores
+        setPalette(filtered.slice(0, 5));
 
-        setPalette(paletteFive);
-       setPaletteVersion((v) => v + 1);
+        setPaletteVersion((v) => v + 1);     // animaciones
+        setPaletteCount((c) => c + 1);
       })
     .catch((err) => {
         console.error(err);
@@ -92,15 +104,19 @@ const isCurrentFavorite = post ? isFavorite(post.id) : false;
 
 // Lògica per a Favorits Paletta
 
-const paletteId = `palette-${id}`; //Creem id únic per la paleta (basat en el color actual)
+const paletteId = `palette-${id}-${paletteCount}`; // tiene en cuenta el id de la paleta Y EL NUMERO DE PALETA 1,2,3...
 const isFavPalette = isFavoritePalette(paletteId); //Comprovar si esta guardat
 
 
-const currentPaletteObj = { //Creem l'objecte que guardem al context
+const currentPaletteObj = {
   id: paletteId,
   baseColor: id,
+  number: paletteCount,
   colors: palette
 };
+
+
+
 
 
 //----------------------------------------------------------------------  
@@ -157,19 +173,23 @@ const currentPaletteObj = { //Creem l'objecte que guardem al context
         </div>
 
 {/* GENERADOR DE PALETA*/}
+
   <div className="palette-generator">
     <div className={`palette-controls ${palette ? 'palette-generated' : ''}`}>
       
       {palette && (
         // AFEGIM CONTENIDOR FLEX PER AL TÍTOL I EL BOTÓ
         <div className="palette-header"> 
-          <span className="palette-title">Palette 1</span>
+          <span className="palette-title">
+            Palette {paletteCount || 1}
+          </span>
                  
           {/* CANVI 2: Fem servir la classe "save-palette-btn" en lloc de "save-button" */}
-          <button 
-            className="save-palette-btn" 
-            onClick={() => toggleFavoritePalette(currentPaletteObj)}
-          >
+          <button
+            className="save-palette-btn"
+            disabled={!palette}
+            onClick={() => toggleFavoritePalette(currentPaletteObj)}>
+              
             <img 
               src={isFavPalette ? "/icons/save-filled.svg" : "/icons/save.svg"} 
               alt="Guardar Paleta"
