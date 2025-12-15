@@ -6,7 +6,7 @@ import './FavoritesPage.css';
 function FavoritesPage() {
   const { favorites, toggleFavorite, favPalettes, toggleFavoritePalette } = useFavorites();
   
-  // ESTADO: 'colors' es el valor inicial (por defecto)
+  // ESTADO: "colors" es el valor inicial
   const [activeTab, setActiveTab] = useState('colors'); 
 
   return (
@@ -74,7 +74,7 @@ function FavoritesPage() {
         </>
       )}
 
-      {/* --- CONTENIDO PALETAS --- */}
+      {/*CONTENIDO PALETAS*/}
       {activeTab === 'palettes' && (
         <>
           {favPalettes.length === 0 ? ( //Si NO hi ha paletes guardades

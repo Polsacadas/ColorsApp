@@ -54,7 +54,7 @@ function ColorsList() {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
  
- // --- EFECTO SECUNDARIO (Carga Inicial) ---
+ // Carga Inicial
    useEffect(() => {
 
    const fetchPosts = async () => {
@@ -65,7 +65,7 @@ function ColorsList() {
         }
         const data = await response.json();
 
-        // 1. AGREGAMOS CLASIFICACIÓN Y ALTURA
+        // AGREGAMOS CLASIFICACIÓN Y ALTURA
        const classifiedPosts = data.map(post => ({
        ...post, 
           // Clasificamos el color y lo guardamos
@@ -87,7 +87,7 @@ function ColorsList() {
    }, []);
 
 
-  // --- FUNCIÓN DE FILTRADO ---
+  // FILTRADO
   const handleFilterClick = (categoryName) => {
     setActiveFilter(categoryName); // Actualiza el botón activo
 
@@ -102,7 +102,7 @@ function ColorsList() {
   };
 
 
-   // --- RENDERIZADO CONDICIONAL ---
+  
   if (loading) {
    return <p>Carregant colors...</p>;
  }
