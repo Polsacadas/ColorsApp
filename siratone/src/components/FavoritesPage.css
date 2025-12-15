@@ -30,7 +30,7 @@
   background-color: #333; 
   color: white;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+ 
 }
 
 .empty-message {
@@ -57,7 +57,7 @@
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+ 
 }
 
 /* --- Cuadrícula de 3 --- */
@@ -84,7 +84,7 @@
   border-radius: 12px; 
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  
   transition: transform 0.2s;
 }
 
@@ -164,7 +164,7 @@
   height: 100px; /* Alçada similar a la imatge */
   border-radius: 15px; 
   overflow: hidden; /* retalla els fills perquè no surtin de la corba */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+  
 }
 
 
@@ -176,6 +176,15 @@
   transition: opacity 0.2s;
 }
 
+.favorites-page-container {
+  font-family: 'Inter', sans-serif;
+  padding: 10px;
+  margin-top:15%;
+  min-height: 100vh; 
+  width: 100%;   
+  min-width: 100vw; 
+  box-sizing: border-box;
+}
 .palette-strip-item:hover {
   opacity: 0.9;
 }
@@ -188,7 +197,7 @@
   font-size: 0.75rem; 
   font-weight: bold;
   text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3); 
+ 
   pointer-events: none; /* No interfereix en el clic per redirigir als detalls del color */
 }
 

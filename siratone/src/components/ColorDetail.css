@@ -38,8 +38,7 @@
   z-index: 10;
 }
 
-.save-button { right: 0; }
-.is-favorite { right: 40px; }
+
 
 .back-btn {
   display: inline-block;
@@ -69,7 +68,7 @@
   align-items: flex-end;
   overflow: hidden; 
   position: relative;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  
 }
 
 .overlay-info {

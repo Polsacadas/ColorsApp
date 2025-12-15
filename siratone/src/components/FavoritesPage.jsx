@@ -14,7 +14,7 @@ function FavoritesPage() {
       
       {/* CABECERA Y PESTAÑAS */}
       <div className="fav-header">
-        <h2>MIS FAVORITOS</h2>
+        <h2>My favourites</h2>
         
         <div className="fav-tabs">
           {/* Botón Colores */}
