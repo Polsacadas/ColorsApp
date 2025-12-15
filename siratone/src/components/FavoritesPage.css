@@ -179,6 +179,8 @@
 .favorites-page-container {
   font-family: 'Inter', sans-serif;
   padding: 30%;
+  padding-left: 10%;
+  padding-right: 10%;
   min-height: 100vh; 
   width: 100%;   
   min-width: 100vw; 
