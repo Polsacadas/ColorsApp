@@ -1,5 +1,3 @@
-// HeaderColorDetail.jsx (ADAPTAT)
-
 // LÍNIA ELIMINADA: import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HeaderColorDetail.css';

@@ -83,7 +83,7 @@ function ColorDetail() {
     colors: palette
   };
 
-  // 🔥 CLASSES DARK MODE
+  // CLASSES DARK MODE
   const detailContainerClass = isDarkMode ? 'detail-container dark' : 'detail-container';
   const detailCardClass = isDarkMode ? 'detail-card dark' : 'detail-card';
 

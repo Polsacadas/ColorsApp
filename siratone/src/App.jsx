@@ -1,5 +1,3 @@
-// App.jsx
-
 import { Routes, Route, useLocation } from 'react-router-dom'; 
 import ColorsList from './components/ColorsList.jsx';
 import ColorDetail from './components/ColorDetail.jsx';
