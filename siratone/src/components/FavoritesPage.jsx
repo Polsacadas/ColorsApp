@@ -30,7 +30,7 @@ function FavoritesPage() {
             className={`tab-btn ${activeTab === 'palettes' ? 'active' : ''}`}
             onClick={() => setActiveTab('palettes')}
           >
-            Paletes ({favPalettes.length})
+            Palettes ({favPalettes.length})
           </button>
         </div>
       </div>
@@ -40,9 +40,9 @@ function FavoritesPage() {
         <>
           {favorites.length === 0 ? ( //Si NO hi ha colors guardats
             <div className="empty-message">
-              <h3>Encara no hi ha colors...</h3>
+              <h3>No saved colors...</h3>
               <Link to="/" className="back-btn" style={{marginTop: '20px', display:'inline-block'}}> 
-                Explorar colors 
+                Explore colors 
               </Link>
             </div>
           ) : (//SI hi ha colors guardats
@@ -79,9 +79,9 @@ function FavoritesPage() {
         <>
           {favPalettes.length === 0 ? ( //Si NO hi ha paletes guardades
             <div className="empty-message">
-              <h3>No hi ha paletes guardades</h3>
+              <h3>No saved palettes...</h3>
               <Link to="/" className="back-btn" style={{marginTop: '20px', display:'inline-block'}}> 
-                Explorar colors 
+                Explore colors 
               </Link>
             </div>
           ) : ( //SI hi ha paletes guardades
