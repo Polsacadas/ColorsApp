@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import './ColorDetail.css';
 import { useFavorites } from '../context/FavoritesContext'; 
 import HeaderColorDetail from './HeaderColorDetail';
+// NOU: Importem el hook del Context
+import { useTheme } from '../context/ThemeContext'; // <<< CANVI CLAU
 
 function ColorDetail() {
   const { id } = useParams();
@@ -16,6 +18,8 @@ function ColorDetail() {
   
   const [paletteCount, setPaletteCount] = useState(0); //hago el contador para meter el numero de paleta generada
 
+  // NOU: Obtenim l'estat del tema
+  const { isDarkMode } = useTheme(); // <<< CANVI CLAU
   
   useEffect(() => {
     setPalette(null);
@@ -122,6 +126,10 @@ const currentPaletteObj = {
 //----------------------------------------------------------------------  
 
   const complementaryHex = getComplementaryColor(colorData.rgb);
+
+  // NOU: Definim les classes condicionals
+  const detailContainerClass = isDarkMode ? 'detail-container dark' : 'detail-container'; // Per al fons de la vista
+  const detailCardClass = isDarkMode ? 'detail-card dark' : 'detail-card'; // Per a la targeta principal
 
   return (
   <div className="detail-container">
