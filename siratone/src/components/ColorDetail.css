@@ -1,5 +1,5 @@
 .detail-container {
-  position: fixed; 
+  position: relative; 
   top: 0;
   left: 0;
   width: 100%;
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: flex-start;
   padding-top: 10vh;
+  /* padding-bottom: 30vh; */
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -203,17 +204,17 @@
 
 .palette-container {
   position: fixed;
-  bottom: 12vh; 
+  bottom: 0px; 
   left: 50%; 
   transform: translateX(-50%);
   width: 95%;
   max-width: 800px; 
-  height: 120px; 
+  height: 30vh; 
   display: flex;
   align-items: flex-end; 
   justify-content: center; 
   gap: 8px; 
-  z-index: 100;
+  z-index: 0;
   pointer-events: none; 
 }
 
@@ -221,7 +222,7 @@
   flex: 1;
   max-width: 80px;
   height: 100%;          
-  border-radius: 12px;
+  border-radius: 12px 12px 0px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,14 +254,21 @@
 }
 
 /* ---------------- RESPONSIVE ---------------- */
-
-@media (min-width: 768px) {
+@media (min-width: 476px) {
   .detail-card { padding-top: 40px; }
-  .palette-container { bottom: 60px; height: 200px; }
-  .palette-color { max-width: 100px; border-radius: 15px; }
+  .palette-color { max-width: 150px;}
   .palette-hex { font-size: 14px; }
 }
-
+@media (min-width: 768px) {
+  .detail-card { padding-top: 40px; }
+  .palette-color { max-width: 200px;}
+  .palette-hex { font-size: 14px; }
+}
+@media (min-width: 1200px) {
+  .detail-card { padding-top: 40px; }
+  .palette-color { max-width: 300px;}
+  .palette-hex { font-size: 14px; }
+}
 /* ---------------- DARK MODE ---------------- */
 
 .detail-container.dark {
