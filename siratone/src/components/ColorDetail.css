@@ -1,77 +1,48 @@
+
 .detail-container {
   position: fixed; 
-  top: 10vh;
+  top: 0; /* Cambiado a 0 para mejor control */
+  left: 0;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start; /* Alinea contenido arriba */
+  padding-top: 10vh; /* Espacio superior */
+  overflow-y: auto; /* Permite scroll si la pantalla es muy pequeña */
+  box-sizing: border-box;
 }
 
 .detail-card {
-  width: 85%; 
-  padding: 30px;
-  height: 50%;
+  width: 90%; /* Más ancho en móvil */
+  max-width: 500px; /* Tope de anchura para Desktop */
+  padding: 20px;
   text-align: center;
   font-family: sans-serif;
+  position: relative; /* Para posicionar botones absolutos dentro */
+  margin-bottom: 120px; /* Margen inferior para no tapar la paleta */
 }
 
-.save-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border:none;
-  padding: 8px;
-  cursor: pointer;
-  outline:none;
-}
 
+.save-button,
 .is-favorite {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0;
   background: none;
-  border:none;
+  border: none;
   padding: 8px;
   cursor: pointer;
-  outline:none;
+  outline: none;
+  z-index: 10;
 }
 
-.color-swatch-container{
-  width: 300px;
-  aspect-ratio: 1 / 1;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  margin: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  overflow: hidden; 
-  position: relative;
-}
-
-.overlay-info {
-  color: white; 
-  padding: 20px 30px;
-  border-radius: 12px;
-  text-align: left;
-  max-width: 90%; 
-}
-
-
-.detail-info {
-  font-family: 'Tuffy', sans-serif; 
-  text-align: left ;
-  font-size: 16px;
-  color: white;
-  padding: 2px 4px;
-}
-
+.save-button { right: 0; }
+.is-favorite { right: 40px; } /* Separado del otro botón */
 
 .back-btn {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 0; /* Centrado si es bloque */
   padding: 10px 20px;
   background-color: #cccccc;
   color: rgb(62, 62, 62);
@@ -82,20 +53,53 @@
 
 .back-btn:hover {
   background-color: #626262;
+  color: white;
 }
 
-/* COLOR COMPLEMENTARIO */
-.complementario-container {
-  display: grid;
-  grid-template-columns: auto 150px; 
-  align-items: center;
-  gap: 30px;
-  margin: 30px auto 15px auto;
-  width: 300px;
-  height: 8vh;
-  justify-content: center;
+
+
+.color-swatch-container {
+  width: 100%; /* Ocupa el ancho del padre (.detail-card) */
+  max-width: 350px; /* Límite visual */
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  margin: 0 auto 25px auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
   overflow: hidden; 
   position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.overlay-info {
+  color: white; 
+  padding: 20px;
+  border-radius: 12px;
+  text-align: left;
+  max-width: 100%; 
+  width: 100%;
+  
+}
+
+.detail-info {
+  font-family: 'Tuffy', sans-serif; 
+  text-align: left;
+  font-size: 16px;
+  color: white;
+  padding: 2px 0;
+}
+
+
+
+.complementario-container {
+  display: flex; /* Cambiado a Flex para mejor centrado */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  width: 100%;
 }
 
 .complementario-text {
@@ -109,8 +113,8 @@
 
 .complementario-rect {
   font-family: 'Tuffy', sans-serif;
-  width: 150px;
-  height: 75px;
+  width: 120px; /* Un poco más pequeño para móvil */
+  height: 60px;
   border-radius: 12px;
   position: relative;
   overflow: hidden;  
@@ -120,97 +124,25 @@
   font-family: 'Tuffy', sans-serif;
   position: absolute;
   top: 50%;
-  left: 90%;
-  transform: translate(-50%, -50%) rotate(-90deg);
+  left: 50%; /* Centrado normal */
+  transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;
-  white-space: nowrap;
-  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 
-/* PALETTE */
-
-.palette-generator{
-  font-family: 'Inter', sans-serif;
-  display:inline-block;
-  margin: 15px 0 15px 0;
-}
-
-.palette-button{
+.palette-generator {
   width: 100%;
-  background-color: #d4d4d4;
-  border-radius: 50px;
-  height: 12vw;
-}
-
-.palette-container {
-  position: fixed;
-  bottom:0;
-  left: 0;
-  width: 100%;
-  height: 32vh;
-  margin: none;
-  display: flex;
-  flex-direction: row; 
-  align-items: center;
-  gap: 5px;
-}
-
-/* rectángulo del color de la palette */
-.palette-color {
-  width: 100px;            
-  height: 100%;          
-  border-radius: 12px 12px 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-
-  /* Animación de los colores de la palete */
-  transform-origin: bottom center;
-  transform: scaleY(0);
-  animation-name: pop;
-  animation-duration: 360ms;
-  animation-timing-function: cubic-bezier(.2,.9,.2,1);
-  animation-fill-mode: forwards;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.palette-hex {
-  font-family: 'Inter', sans-serif;
-  color: white;
-  margin: 10px 0;
-  font-size: 14px;
-  transform: rotate(-90deg);
-}
-
-@keyframes pop {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  60% {
-    transform: scaleY(1.08);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-
-.palette-generator{
-  width: 300px; 
-  margin: 15px auto 15px auto; 
+  max-width: 350px;
+  margin: 10px auto;
 }
 
 .palette-controls {
   display: flex;
   align-items: center;
   justify-content: center; 
-  height: 12vw;
+  height: 60px; /* Altura fija en lugar de VW para consistencia */
   transition: justify-content 0.3s ease-out; 
 }
 
@@ -218,23 +150,18 @@
   justify-content: space-between; 
 }
 
-/* ColorDetail.css */
 .palette-title {
   font-size: 1.1em;
   font-weight: bold;
   color: #333;
   opacity: 0; 
-  animation-name: slide-in-right;
-  animation-duration: 0.2s; 
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards; 
-  animation-delay: 0.2s; 
+  animation: slide-in-right 0.2s ease-out forwards 0.2s;
 }
 
-
-
-.palette-button{
-  height: 12vw; 
+/* BOTÓN DE GENERAR PALETA */
+.palette-button {
+  height: 50px; /* Altura fija razonable */
+  width: 100%;
   background-color: #d4d4d4;
   border-radius: 50px;
   border: none;
@@ -243,51 +170,29 @@
   display: flex; 
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease-in-out;
 }
 
-/* ESTADO INICIAL BOTON GENERATE PALETTE*/
-.palette-controls:not(.palette-generated) .palette-button {
-  width: 100%;
-}
-
-/* ESTADO FINAL ICONO BOTON GENERATE PALETTE*/
+/* ESTADO FINAL ICONO BOTON GENERATE PALETTE */
 .palette-controls.palette-generated .palette-button {
-  height: 12vw; 
-  width: 50px; 
-  border-radius: 50%; /* Se vuelve circular */
-  padding: 8px;
-  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out, padding 0.3s ease-in-out;
+  width: 50px; /* Círculo perfecto */
+  padding: 0;
 }
 
 .reload-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   filter: grayscale(1); 
 }
 
-
-@keyframes slide-in-right {
-  0% {
-    transform: translateX(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* ---- NOVES CLASSES AFEGIDES PER AL PAS 1 (GUARDAR PALETA) ---- */
-
-/* Contenidor per alinear Títol + Botó petit */
-.palette-header {   /* NOVA CLASSE */
+/* Header para guardar paleta */
+.palette-header {   
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Botó específic per a guardar la paleta (sense position absolute) */
-.save-palette-btn { /* NOVA CLASSE */
+.save-palette-btn { 
   background: transparent;
   border: none;
   width: 24px;
@@ -299,7 +204,92 @@
   justify-content: center;
 }
 
-.save-palette-btn img { /* NOVA CLASSE */
+.save-palette-btn img { 
   width: 100%;
   height: 100%;
+  object-fit: contain;
+}
+
+
+.palette-container {
+  position: fixed;
+  /* Antes era 20px, ahora usamos vh (viewport height) para que suba proporcionalmente */
+  bottom: 12vh; 
+  left: 50%; 
+  transform: translateX(-50%);
+  
+  width: 95%;
+  max-width: 800px; 
+  height: 120px; 
+  
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-end; 
+  justify-content: center; 
+  gap: 8px; 
+  z-index: 100;
+  pointer-events: none; 
+}
+
+/* Rectángulo de color */
+.palette-color {
+  flex: 1; /* Crecimiento flexible: RESPONSIVE CLAVE */
+  max-width: 80px; /* Ancho máximo por color */
+  height: 100%;          
+  border-radius: 12px 12px 12px 12px; /* Bordes redondeados completos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  pointer-events: auto; /* Reactiva clicks en los colores */
+  
+  /* Animación */
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  animation: pop 360ms cubic-bezier(.2,.9,.2,1) forwards;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.palette-hex {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  font-size: 12px;
+  transform: rotate(-90deg);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+
+
+
+@keyframes pop {
+  0% { transform: scaleY(0); opacity: 0; }
+  60% { transform: scaleY(1.08); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  0% { transform: translateX(20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+
+
+@media (min-width: 768px) {
+  .detail-card {
+    padding-top: 40px;
+  }
+  
+  .palette-container {
+    bottom: 60px;
+    height: 200px;
+  }
+
+  .palette-color {
+     max-width: 100px;
+     border-radius: 15px;
+  }
+  
+  .palette-hex {
+    font-size: 14px;
+  }
 }
