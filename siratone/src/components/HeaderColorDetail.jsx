@@ -29,11 +29,11 @@ function HeaderColorDetail({ colorHex }) {
   };
 
   return (
-    <div className="header-detail">
+    <div className={`header-detail ${isDarkMode ? 'dark' : ''}`}>
       <div className="left-group">
         <button className="return-button" onClick={handleReturn}>
           <img src="/icons/return.svg" alt="Tornar" />
-        </button>
+        </button>
       </div>
       
       <div className="header-detail-title">

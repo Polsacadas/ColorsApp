@@ -3,254 +3,186 @@ import { useParams, Link } from "react-router-dom";
 import './ColorDetail.css';
 import { useFavorites } from '../context/FavoritesContext'; 
 import HeaderColorDetail from './HeaderColorDetail';
-// NOU: Importem el hook del Context
-import { useTheme } from '../context/ThemeContext'; // <<< CANVI CLAU
+import { useTheme } from '../context/ThemeContext';
 
 function ColorDetail() {
   const { id } = useParams();
   const [colorData, setColorData] = useState(null);
 
-  // Paleta + control para reiniciar animaciones
   const [palette, setPalette] = useState(null);
   const [loadingPalette, setLoadingPalette] = useState(false);
   const [paletteError, setPaletteError] = useState(null);
-  const [paletteVersion, setPaletteVersion] = useState(0); // para forzar nuevo key y reiniciar anims
-  
-  const [paletteCount, setPaletteCount] = useState(0); //hago el contador para meter el numero de paleta generada
+  const [paletteVersion, setPaletteVersion] = useState(0);
+  const [paletteCount, setPaletteCount] = useState(0);
 
-  // NOU: Obtenim l'estat del tema
-  const { isDarkMode } = useTheme(); // <<< CANVI CLAU
-  
+  const { isDarkMode } = useTheme();
+  const { toggleFavorite, isFavorite, toggleFavoritePalette, isFavoritePalette } = useFavorites();
+
   useEffect(() => {
     setPalette(null);
     setPaletteVersion(0);
-     setPaletteError(null);
-    fetch(`https://www.thecolorapi.com/id?hex=${id}`)
-      .then((res) => res.json())
-    .then((data) => {
-        setColorData(data);
-      })
-      .catch((error) => console.error("Error cargando color:", error));
-  }, [id]); // El efecto se ejecuta cada vez que 'id' cambia
-
-  const MODES = [
-    "analogic",
-    "monochrome",
-    "monochrome-dark",
-    "monochrome-light",
-    "triad",
-    "quad"
-  ];
-  const generatePalette = () => {
-    if (!colorData) return;
-    setLoadingPalette(true);
     setPaletteError(null);
 
-    const randomMode = MODES[Math.floor(Math.random() * MODES.length)];
-
-    fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=${randomMode}&count=5`)
-      .then((res) => res.json())
-      .then((data) => {
-        const mainHex = colorData.hex.value.toUpperCase();
-        const remoteColors = Array.isArray(data.colors) ? data.colors : [];
-        
-        const filtered = remoteColors.filter(
-        (c) => c.hex && c.hex.value.toUpperCase() !== mainHex
-      );
-
-        // solo 5 colores
-        setPalette(filtered.slice(0, 5));
-
-        setPaletteVersion((v) => v + 1);     // animaciones
-        setPaletteCount((c) => c + 1);
-      })
-    .catch((err) => {
-        console.error(err);
-        setPaletteError("Error generating palette");
-      })
-      .finally(() => setLoadingPalette(false));
-  };
-
-  const getComplementaryColor = (rgb) => {
-    const r = 255 - rgb.r;
-    const g = 255 - rgb.g;
-    const b = 255 - rgb.b;
-
-    const toHex = (value) => value.toString(16).padStart(2, '0').toUpperCase();
-
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  };
-
-//----------------------------------------------------------------------------
-  const { toggleFavorite, isFavorite, toggleFavoritePalette, isFavoritePalette } = useFavorites(); 
-//---------------------------------------------------------------------------
+    fetch(`https://www.thecolorapi.com/id?hex=${id}`)
+      .then(res => res.json())
+      .then(data => setColorData(data))
+      .catch(err => console.error(err));
+  }, [id]);
 
   if (!colorData) {
     return (
-      <div style={{ padding: "50px", textAlign: "center" }}>
+      <div className="detail-container">
         <h2>Carregant informació...</h2>
       </div>
     );
   }
 
-//----------------------------------------------------------------------
+  const post = {
+    id,
+    hex: colorData.hex.value,
+    rgb: colorData.rgb.value
+  };
 
-// Lògica per a Favorits Colors
+  const isCurrentFavorite = isFavorite(post.id);
 
-const post = colorData ? {
-    id: id, 
-    hex: colorData.hex.value, 
-    rgb: colorData.rgb.value 
-} : null;
+  const MODES = ["analogic", "monochrome", "monochrome-dark", "monochrome-light", "triad", "quad"];
 
-const isCurrentFavorite = post ? isFavorite(post.id) : false;
+  const generatePalette = () => {
+    const randomMode = MODES[Math.floor(Math.random() * MODES.length)];
+    setLoadingPalette(true);
 
+    fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=${randomMode}&count=5`)
+      .then(res => res.json())
+      .then(data => {
+        const mainHex = colorData.hex.value.toUpperCase();
+        const filtered = data.colors.filter(
+          c => c.hex.value.toUpperCase() !== mainHex
+        );
+        setPalette(filtered.slice(0, 5));
+        setPaletteVersion(v => v + 1);
+        setPaletteCount(c => c + 1);
+      })
+      .catch(() => setPaletteError("Error generating palette"))
+      .finally(() => setLoadingPalette(false));
+  };
 
-// Lògica per a Favorits Paletta
-
-const paletteId = `palette-${id}-${paletteCount}`; // tiene en cuenta el id de la paleta Y EL NUMERO DE PALETA 1,2,3...
-const isFavPalette = isFavoritePalette(paletteId); //Comprovar si esta guardat
-
-
-const currentPaletteObj = {
-  id: paletteId,
-  baseColor: id,
-  number: paletteCount,
-  colors: palette
-};
-
-
-
-
-
-//----------------------------------------------------------------------  
+  const getComplementaryColor = (rgb) => {
+    const toHex = v => v.toString(16).padStart(2, '0').toUpperCase();
+    return `#${toHex(255 - rgb.r)}${toHex(255 - rgb.g)}${toHex(255 - rgb.b)}`;
+  };
 
   const complementaryHex = getComplementaryColor(colorData.rgb);
 
-  // NOU: Definim les classes condicionals
-  const detailContainerClass = isDarkMode ? 'detail-container dark' : 'detail-container'; // Per al fons de la vista
-  const detailCardClass = isDarkMode ? 'detail-card dark' : 'detail-card'; // Per a la targeta principal
+  const paletteId = `palette-${id}-${paletteCount}`;
+  const isFavPalette = isFavoritePalette(paletteId);
+
+  const currentPaletteObj = {
+    id: paletteId,
+    baseColor: id,
+    number: paletteCount,
+    colors: palette
+  };
+
+  // 🔥 CLASSES DARK MODE
+  const detailContainerClass = isDarkMode ? 'detail-container dark' : 'detail-container';
+  const detailCardClass = isDarkMode ? 'detail-card dark' : 'detail-card';
 
   return (
-  <div className="detail-container">
+    <div className={detailContainerClass}>
+      <HeaderColorDetail colorHex={colorData.hex.value} />
 
-      {/* <Link to="/" className="back-btn">
-        Tornar
-      </Link> */}
-<HeaderColorDetail colorHex={colorData.hex.value}></HeaderColorDetail>
-      <div className="detail-card">
-        {/* COLOR */}
+      <div className={detailCardClass}>
+
+        {/* COLOR PRINCIPAL */}
         <div
           className="color-swatch-container"
           style={{ backgroundColor: colorData.hex.value }}
         >
-          {post && ( 
-            <button 
-              className={`save-button ${isCurrentFavorite ? 'is-favorite' : ''}`}
-              onClick={() => toggleFavorite(post)} 
-              >
-                <img 
-                src={isCurrentFavorite ? "/icons/save-filled.svg" : "/icons/save.svg"} 
-                alt={isCurrentFavorite ? "Treure de Favorits" : "Guardar a Favorits"} 
-              />
-              </button>
-            )}
+          <button
+            className={`save-button ${isCurrentFavorite ? 'is-favorite' : ''}`}
+            onClick={() => toggleFavorite(post)}
+          >
+            <img
+              src={isCurrentFavorite ? "/icons/save-filled.svg" : "/icons/save.svg"}
+              alt="Guardar color"
+            />
+          </button>
 
           <div className="overlay-info">
-            <div className="detail-info">
             <p><strong>HEX:</strong> {colorData.hex.value}</p>
             <p><strong>RGB:</strong> {colorData.rgb.value}</p>
-            </div>
           </div>
         </div>
 
-{/* COLOR COMPLEMENTARIO */}
+        {/* COLOR COMPLEMENTARI */}
         <div className="complementario-container">
           <div className="complementario-text">
             <span>Complementary</span>
             <span>color</span>
-        </div>
+          </div>
 
-          <Link to={`/post/${complementaryHex.replace('#', '')}`}  
-          className="complementario-rect"
-          style={{ backgroundColor: complementaryHex }}>
-            
-          <span className="complementario-hex">{complementaryHex}</span>
+          <Link
+            to={`/post/${complementaryHex.replace('#', '')}`}
+            className="complementario-rect"
+            style={{ backgroundColor: complementaryHex }}
+          >
+            <span className="complementario-hex">{complementaryHex}</span>
           </Link>
-
         </div>
 
-{/* GENERADOR DE PALETA*/}
+        {/* GENERADOR DE PALETA */}
+        <div className="palette-generator">
+          <div className={`palette-controls ${palette ? 'palette-generated' : ''}`}>
+            {palette && (
+              <div className="palette-header">
+                <span className="palette-title">Palette {paletteCount}</span>
 
-  <div className="palette-generator">
-    <div className={`palette-controls ${palette ? 'palette-generated' : ''}`}>
-      
-      {palette && (
-        // AFEGIM CONTENIDOR FLEX PER AL TÍTOL I EL BOTÓ
-        <div className="palette-header"> 
-          <span className="palette-title">
-            Palette {paletteCount || 1}
-          </span>
-                 
-          {/* CANVI 2: Fem servir la classe "save-palette-btn" en lloc de "save-button" */}
-          <button
-            className="save-palette-btn"
-            disabled={!palette}
-            onClick={() => toggleFavoritePalette(currentPaletteObj)}>
-              
-            <img 
-              src={isFavPalette ? "/icons/save-filled.svg" : "/icons/save.svg"} 
-              alt="Guardar Paleta"
-              // Afegim el filtre per si de cas la icona és blanca
-              style={{filter: 'brightness(0)'}} 
-            />
-          </button>
+                <button
+                  className="save-palette-btn"
+                  onClick={() => toggleFavoritePalette(currentPaletteObj)}
+                >
+                  <img
+                    src={isFavPalette ? "/icons/save-filled.svg" : "/icons/save.svg"}
+                    alt="Guardar Paleta"
+                    style={{ filter: isDarkMode ? 'brightness(1)' : 'brightness(0)' }}
+                  />
+                </button>
+              </div>
+            )}
+
+            <button
+              className="palette-button"
+              onClick={generatePalette}
+              disabled={loadingPalette}
+            >
+              {palette ? (
+                <img src="/icons/reload.svg" alt="Reload" />
+              ) : (
+                'Generate Palette'
+              )}
+            </button>
+          </div>
         </div>
-      )}
-      
-      <button 
-        className="palette-button" 
-        onClick={generatePalette} 
-        disabled={loadingPalette}
-      >
-        {palette ? (
-          <img 
-              src="/icons/reload.svg" 
-              alt="Regenerar Paleta" 
-              className="reload-icon"
-          />
-        ) : (
-          'Generate Palette'
+
+        {palette && (
+          <div className="palette-container" key={paletteVersion}>
+            {palette.map((col, i) => (
+              <div
+                key={i}
+                className="palette-color"
+                style={{
+                  backgroundColor: col.hex.value,
+                  animationDelay: `${i * 120}ms`
+                }}
+              >
+                <span className="palette-hex">{col.hex.value}</span>
+              </div>
+            ))}
+          </div>
         )}
-      </button>
+
+      </div>
     </div>
-  </div>
-
-        
-
-          {loadingPalette && <p></p>}
-          {paletteError && <p>{paletteError}</p>}
-
-          {/* PALETA: se renderiza en un contenedor fijo bottom; key={paletteVersion} reinicia anim */}
-          {palette && (
-            <div className="palette-container" key={`palette-${paletteVersion}`}>
-              {palette.map((col, index) => (
-                <div
-                  key={col.hex.value + index}
-                  className="palette-color"
-                  style={{
-                    backgroundColor: col.hex.value,
-                    // stagger animation: index * 120ms
-                    animationDelay: `${index * 120}ms`,
-                  }}
-                  >
-                  <span className="palette-hex">{col.hex.value}</span>
-                </div>
-                ))}
-            </div>
-          )}
-    </div>
-  </div>
   );
 }
 

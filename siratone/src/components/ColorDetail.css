@@ -1,29 +1,29 @@
-
 .detail-container {
   position: fixed; 
-  top: 0; /* Cambiado a 0 para mejor control */
+  top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Alinea contenido arriba */
-  padding-top: 10vh; /* Espacio superior */
-  overflow-y: auto; /* Permite scroll si la pantalla es muy pequeña */
+  justify-content: flex-start;
+  padding-top: 10vh;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
 .detail-card {
-  width: 90%; /* Más ancho en móvil */
-  max-width: 500px; /* Tope de anchura para Desktop */
+  width: 90%;
+  max-width: 500px;
   padding: 20px;
   text-align: center;
   font-family: sans-serif;
-  position: relative; /* Para posicionar botones absolutos dentro */
-  margin-bottom: 120px; /* Margen inferior para no tapar la paleta */
+  position: relative;
+  margin-bottom: 120px;
 }
 
+/* ---------------- BUTTONS ---------------- */
 
 .save-button,
 .is-favorite {
@@ -38,11 +38,10 @@
 }
 
 .save-button { right: 0; }
-.is-favorite { right: 40px; } /* Separado del otro botón */
+.is-favorite { right: 40px; }
 
 .back-btn {
   display: inline-block;
-  margin-left: 0; /* Centrado si es bloque */
   padding: 10px 20px;
   background-color: #cccccc;
   color: rgb(62, 62, 62);
@@ -56,11 +55,11 @@
   color: white;
 }
 
-
+/* ---------------- COLOR CARD ---------------- */
 
 .color-swatch-container {
-  width: 100%; /* Ocupa el ancho del padre (.detail-card) */
-  max-width: 350px; /* Límite visual */
+  width: 100%;
+  max-width: 350px;
   aspect-ratio: 1 / 1;
   border-radius: 15px;
   margin: 0 auto 25px auto;
@@ -77,23 +76,19 @@
   padding: 20px;
   border-radius: 12px;
   text-align: left;
-  max-width: 100%; 
   width: 100%;
-  
 }
 
 .detail-info {
   font-family: 'Tuffy', sans-serif; 
-  text-align: left;
   font-size: 16px;
   color: white;
-  padding: 2px 0;
 }
 
-
+/* ---------------- COMPLEMENTARY ---------------- */
 
 .complementario-container {
-  display: flex; /* Cambiado a Flex para mejor centrado */
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -106,14 +101,13 @@
   font-family: 'Tuffy', sans-serif; 
   display: flex;
   flex-direction: column;
-  text-align: left;
   font-weight: bold;
   font-size: 16px;
 }
 
 .complementario-rect {
   font-family: 'Tuffy', sans-serif;
-  width: 120px; /* Un poco más pequeño para móvil */
+  width: 120px;
   height: 60px;
   border-radius: 12px;
   position: relative;
@@ -121,16 +115,16 @@
 }
 
 .complementario-hex {
-  font-family: 'Tuffy', sans-serif;
   position: absolute;
   top: 50%;
-  left: 50%; /* Centrado normal */
+  left: 50%;
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: white;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* ---------------- PALETTE GENERATOR ---------------- */
 
 .palette-generator {
   width: 100%;
@@ -142,7 +136,7 @@
   display: flex;
   align-items: center;
   justify-content: center; 
-  height: 60px; /* Altura fija en lugar de VW para consistencia */
+  height: 60px;
   transition: justify-content 0.3s ease-out; 
 }
 
@@ -158,14 +152,12 @@
   animation: slide-in-right 0.2s ease-out forwards 0.2s;
 }
 
-/* BOTÓN DE GENERAR PALETA */
 .palette-button {
-  height: 50px; /* Altura fija razonable */
+  height: 50px;
   width: 100%;
   background-color: #d4d4d4;
   border-radius: 50px;
   border: none;
-  padding: 0 20px;
   cursor: pointer;
   display: flex; 
   align-items: center;
@@ -173,10 +165,8 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* ESTADO FINAL ICONO BOTON GENERATE PALETTE */
 .palette-controls.palette-generated .palette-button {
-  width: 50px; /* Círculo perfecto */
-  padding: 0;
+  width: 50px;
 }
 
 .reload-icon {
@@ -185,7 +175,8 @@
   filter: grayscale(1); 
 }
 
-/* Header para guardar paleta */
+/* Save palette */
+
 .palette-header {   
   display: flex;
   align-items: center;
@@ -197,7 +188,6 @@
   border: none;
   width: 24px;
   height: 24px;
-  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -207,23 +197,19 @@
 .save-palette-btn img { 
   width: 100%;
   height: 100%;
-  object-fit: contain;
 }
 
+/* ---------------- PALETTE VIEW ---------------- */
 
 .palette-container {
   position: fixed;
-  /* Antes era 20px, ahora usamos vh (viewport height) para que suba proporcionalmente */
   bottom: 12vh; 
   left: 50%; 
   transform: translateX(-50%);
-  
   width: 95%;
   max-width: 800px; 
   height: 120px; 
-  
   display: flex;
-  flex-direction: row; 
   align-items: flex-end; 
   justify-content: center; 
   gap: 8px; 
@@ -231,19 +217,15 @@
   pointer-events: none; 
 }
 
-/* Rectángulo de color */
 .palette-color {
-  flex: 1; /* Crecimiento flexible: RESPONSIVE CLAVE */
-  max-width: 80px; /* Ancho máximo por color */
+  flex: 1;
+  max-width: 80px;
   height: 100%;          
-  border-radius: 12px 12px 12px 12px; /* Bordes redondeados completos */
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  pointer-events: auto; /* Reactiva clicks en los colores */
-  
-  /* Animación */
+  pointer-events: auto;
   transform-origin: bottom center;
   transform: scaleY(0);
   animation: pop 360ms cubic-bezier(.2,.9,.2,1) forwards;
@@ -251,15 +233,13 @@
 }
 
 .palette-hex {
-  font-family: 'Inter', sans-serif;
   color: white;
   font-size: 12px;
   transform: rotate(-90deg);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   white-space: nowrap;
 }
 
-
+/* ---------------- ANIMATIONS ---------------- */
 
 @keyframes pop {
   0% { transform: scaleY(0); opacity: 0; }
@@ -268,28 +248,60 @@
 }
 
 @keyframes slide-in-right {
-  0% { transform: translateX(20px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-
+/* ---------------- RESPONSIVE ---------------- */
 
 @media (min-width: 768px) {
-  .detail-card {
-    padding-top: 40px;
-  }
-  
-  .palette-container {
-    bottom: 60px;
-    height: 200px;
-  }
+  .detail-card { padding-top: 40px; }
+  .palette-container { bottom: 60px; height: 200px; }
+  .palette-color { max-width: 100px; border-radius: 15px; }
+  .palette-hex { font-size: 14px; }
+}
 
-  .palette-color {
-     max-width: 100px;
-     border-radius: 15px;
-  }
-  
-  .palette-hex {
-    font-size: 14px;
-  }
+/* ================================================= */
+/* 🌙 DARK MODE */
+/* ================================================= */
+
+.detail-container.dark {
+  background-color: #121212;
+}
+
+.detail-card.dark {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.detail-container.dark p,
+.detail-container.dark span,
+.detail-container.dark strong {
+  color: #ffffff;
+}
+
+.detail-container.dark .palette-title {
+  color: #ffffff;
+}
+
+.detail-container.dark .palette-button {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.detail-container.dark .reload-icon {
+  filter: brightness(1);
+}
+
+.detail-container.dark .complementario-text {
+  color: #ffffff;
+}
+
+.detail-container.dark .color-swatch-container,
+.detail-container.dark .palette-color {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.detail-container.dark .save-palette-btn img {
+  filter: brightness(1);
 }
